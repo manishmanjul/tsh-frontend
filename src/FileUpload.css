@@ -1,0 +1,11 @@
+.text {
+  color: black;
+}
+
+.file-upload-main-container {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 50%;
+  max-width: 50%;
+}

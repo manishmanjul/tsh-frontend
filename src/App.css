@@ -1,0 +1,27 @@
+.App-top-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  color: white;
+  background-color: white;
+}
+.App-bottom-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  color: white;
+  min-width: 97%;
+  max-width: 97%;
+  border: solid 1px rgb(241, 237, 237);
+  background-color: white;
+}
+
+.App-master-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(248, 244, 244);
+  min-height: max-content;
+}

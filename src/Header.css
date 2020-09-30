@@ -1,0 +1,107 @@
+.main-container {
+  display: flex;
+  width: 100%;
+  margin: 0px;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+.sub-container {
+  display: flex;
+  width: 100%;
+  padding: 0px;
+  padding-bottom: 1px;
+  flex-direction: row;
+  background-color: rgb(63, 59, 59);
+  color: white;
+  margin: 0px;
+}
+.sub-container-extension {
+  border-bottom: solid 1px rgb(233, 233, 233);
+}
+
+.sub-container-text {
+  text-align: center;
+}
+
+.text-header {
+  display: flex;
+  font-family: sans-serif;
+  font-style: normal;
+  font-size: x-small;
+  font-weight: lighter;
+  color: rgb(94, 91, 91);
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 3px;
+}
+.title-text {
+  display: flex;
+  justify-self: left;
+  color: rgb(116, 104, 104);
+  margin: 0px;
+  align-self: center;
+  width: 100%;
+  padding-left: 10mm;
+}
+p,
+ul.header,
+li {
+  font-family: sans-serif;
+}
+ul.header {
+  padding-left: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+ul.header li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+}
+ul.header li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 13px;
+  display: inline-block;
+}
+.content li {
+  margin-bottom: 0px;
+}
+.content {
+  background-color: #fff;
+  padding: 20px;
+}
+.active {
+  background-color: #057bc9;
+}
+.header-logo {
+  display: flex;
+  justify-self: left;
+  align-self: center;
+  margin-left: 0px;
+  max-height: 45px;
+  min-height: 45px;
+  padding-right: 0mm;
+}
+.login-img {
+  display: flex;
+  justify-self: right;
+  align-self: center;
+  padding-right: 0px;
+  max-width: 55px;
+}
+.menu-tabs {
+  min-width: 130px;
+}
+.login-button {
+  min-width: 100px;
+  border: solid 1px white;
+  border-radius: 10px;
+}
+.logout-button {
+  min-width: 100px;
+  border: solid 1px white;
+  border-radius: 10px;
+  background-color: rgb(3, 151, 161);
+}

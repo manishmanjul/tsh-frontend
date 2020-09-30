@@ -1,0 +1,89 @@
+.card-header.batch {
+  font-family: Verdana;
+  font-size: 12px;
+  min-height: 35px;
+}
+.card-body.batch {
+  font-family: Tahoma;
+  font-size: 11px;
+  font-weight: bold;
+}
+.card-header.term.blue {
+  background-color: rgb(172, 216, 252);
+  font-family: Verdana;
+  font-size: 14px;
+  min-height: 0px;
+}
+.card-body.term.blue {
+  font-family: Tahoma;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: rgb(201, 228, 250);
+}
+.card-body.teacher.blue {
+  font-family: Tahoma;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: rgb(201, 228, 250);
+}
+.card-header.term.green {
+  background-color: rgb(171, 240, 234);
+  font-family: Verdana;
+  font-size: 14px;
+  min-height: 0px;
+}
+.card-body.term.green {
+  font-family: Tahoma;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: rgb(189, 247, 242);
+}
+.card-body.teacher.green {
+  font-family: Tahoma;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: rgb(189, 247, 242);
+}
+.card-header.term.orange {
+  background-color: rgb(240, 227, 171);
+  font-family: Verdana;
+  font-size: 14px;
+  min-height: 0px;
+}
+.card-body.term.orange {
+  font-family: Tahoma;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: rgb(247, 239, 206);
+}
+.card-body.teacher.orange {
+  font-family: Tahoma;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: rgb(247, 239, 206);
+}
+.right-arrow {
+  width: 0;
+  height: 0;
+}
+.left-end {
+  width: 0;
+  height: 0;
+  border-left: 32px solid transparent;
+}
+.right-end {
+  width: 0;
+  height: 0;
+  border-top: 32px solid transparent;
+  border-bottom: 32px solid transparent;
+}
+.medium-heading {
+  font-family: Verdana;
+  font-size: 15px;
+  font-weight: bolder;
+}
+.medium-text {
+  font-family: "Tahoma";
+  font-size: 13px;
+  font-weight: bolder;
+}

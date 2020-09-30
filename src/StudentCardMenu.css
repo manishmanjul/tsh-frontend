@@ -1,0 +1,8 @@
+.dropdown-toggle::after {
+  color: aqua;
+}
+.dropdown-toggle {
+  background-color: rgb(146, 142, 142);
+  min-height: 35px;
+  min-width: 35px;
+}
