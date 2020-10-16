@@ -114,6 +114,7 @@ class BatchCardList extends Component {
 
   render() {
     const batches = this.state.batchData;
+    console.log(batches)
     var eventCounter = 1;
     if (this.state.feedbackRefreshRequired) {
       this.fetchFeedbackCategories();

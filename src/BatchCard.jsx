@@ -217,10 +217,17 @@ class BatchCard extends Component {
     }
     const responseMessage = await response.json();
 
-    if (responseMessage.returnCode === 100) {
-      this.props.feedbackSubmit(true, true, responseMessage.returnCode);
+    if (responseMessage.message.returnCode === 100) {
+      await this.setState({
+        batchData: JSON.parse(JSON.stringify(responseMessage.schedule)),
+      });
+      this.props.feedbackSubmit(true, true, responseMessage.message.returnCode);
     } else {
-      this.props.feedbackSubmit(true, false, responseMessage.returnCode);
+      this.props.feedbackSubmit(
+        true,
+        false,
+        responseMessage.message.returnCode
+      );
     }
   };
 

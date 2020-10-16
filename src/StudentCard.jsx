@@ -233,78 +233,41 @@ class StudentCard extends Component {
               FEEDBACK
             </div>
             <div className="d-flex justify-content-center flex-wrap">
-              <div className="border-grey w-50p h-70 rounded-top-left-10 rounded-top-right-10 background-grad-grey shadow">
-                <div
-                  className={
-                    "w-100 d-flex flex-row justify-content-between background-grad letter-s3 text-helvetica font-weight-bold sm-text text-lightgreyplus1 rounded-top-left-10 pl-3 rounded-top-right-10 " +
-                    this.state.profile
-                  }
-                >
-                  REVISION
-                  <a
-                    href="#"
-                    title="Change Feedback"
-                    className="glyphicon glyphicon-pencil text-danger border-0"
-                  />
+              {data.sortedFeedback.map((item) => (
+                <div className="border-grey w-50p h-70 rounded-top-left-10 rounded-top-right-10 background-grad-grey shadow">
+                  <div
+                    className={
+                      "w-100 d-flex flex-row justify-content-between background-grad letter-s3 text-helvetica text-uppercase font-weight-bold sm-text text-lightgreyplus1 rounded-top-left-10 pl-3 mb-1 rounded-top-right-10 " +
+                      this.state.profile
+                    }
+                  >
+                    {item.description}
+                    <a
+                      href="#"
+                      title="Change Feedback"
+                      className="glyphicon glyphicon-pencil text-danger border-0"
+                    />
+                  </div>
+                  {item.feedbacks ? (
+                    item.feedbacks.map((feedback) => (
+                      <p className="text-darkgrey text-verdana text-11 font-weight-light m-0 p-0">
+                        <i className="smaller-text text-success glyphicon glyphicon-arrow-right mr-2" />
+                        {feedback.description}
+                      </p>
+                    ))
+                  ) : (
+                    <p className="text-darkgrey medium-text font-weight-light">
+                      No Feedback available.
+                    </p>
+                  )}
+                  <p className="text-darkgrey text-verdena text-11 pt-1 pl-1 font-weight-light">
+                    <span className="text-georgia text-11 text-danger">
+                      Teachers comment :
+                    </span>
+                    {" " + item.teachersComment}
+                  </p>
                 </div>
-                <p className="text-darkgrey medium-text pt-1 pl-1 font-weight-light">
-                  Needs more practice on fraction simplification.
-                </p>
-              </div>
-              <div className="border-grey w-50p h-70 rounded-top-left-10 rounded-top-right-10 background-grad-grey shadow">
-                <div
-                  className={
-                    "w-100 d-flex flex-row justify-content-between background-grad letter-s3 text-helvetica font-weight-bold sm-text text-lightgreyplus1 rounded-top-left-10 pl-3 rounded-top-right-10 " +
-                    this.state.profile
-                  }
-                >
-                  CLASSWORK
-                  <a
-                    href="#"
-                    title="Change Feedback"
-                    className="glyphicon glyphicon-pencil text-danger border-0"
-                  />
-                </div>
-                <p className="text-darkgrey medium-text pt-1 pl-1 font-weight-light">
-                  Needs more practice on fraction simplification.
-                </p>
-              </div>
-              <div className="border-grey w-50p h-70 rounded-top-left-10 rounded-top-right-10 background-grad-grey shadow">
-                <div
-                  className={
-                    "w-100 d-flex flex-row justify-content-between background-grad letter-s3 text-helvetica font-weight-bold sm-text text-lightgreyplus1 rounded-top-left-10 pl-3 rounded-top-right-10 " +
-                    this.state.profile
-                  }
-                >
-                  HOMEWORK
-                  <a
-                    href="#"
-                    title="Change Feedback"
-                    className="glyphicon glyphicon-pencil text-danger border-0"
-                  />
-                </div>
-                <p className="text-darkgrey medium-text pt-1 pl-1 font-weight-light">
-                  Needs more practice on fraction simplification.
-                </p>
-              </div>
-              <div className="border-grey w-50p h-70 rounded-top-left-10 rounded-top-right-10 background-grad-grey shadow">
-                <div
-                  className={
-                    "w-100 d-flex flex-row justify-content-between background-grad letter-s3 text-helvetica font-weight-bold sm-text text-lightgreyplus1 rounded-top-left-10 pl-3 rounded-top-right-10 " +
-                    this.state.profile
-                  }
-                >
-                  COMMENT
-                  <a
-                    href="#"
-                    title="Change Feedback"
-                    className="glyphicon glyphicon-pencil text-danger border-0"
-                  />
-                </div>
-                <p className="text-darkgrey medium-text pt-1 pl-1 font-weight-light">
-                  Needs more practice on fraction simplification.
-                </p>
-              </div>
+              ))}
             </div>
           </Card.Text>
           <Card.Footer className="p-0 m-0 pl-2 pr-2 pt-1 d-flex justify-content-center border-0">
