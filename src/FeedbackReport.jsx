@@ -27,11 +27,12 @@ class FeedbackReport extends Component {
     this.props.resultHandler(this.state.response);
   };
 
-  submit = () => {
-    this.closeMe();
+  submit = () => {    
     this.state.response.next = true;
     this.state.response.goBack = false;
     this.props.resultHandler(this.state.response);
+    this.state.response.studentList = "";
+    this.closeMe();
   };
 
   getProgressColor(step, myVal) {
@@ -46,6 +47,7 @@ class FeedbackReport extends Component {
 
   closeMe() {
     document.getElementById(this.state.keyId).style.display = "none";
+    this.state.response.studentList = "";
     this.setState({ resetChild: true });
   }
 
@@ -86,7 +88,7 @@ class FeedbackReport extends Component {
                   this.getProgressColor(step, 1)
                 }
               >
-                Select CurrenT Topic
+                Select Current Topic
               </div>
               <div
                 className={

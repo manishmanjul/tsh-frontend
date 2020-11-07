@@ -91,31 +91,32 @@ class FeedbackContent extends Component {
 
   render() {
     if (this.props.reset) {
+      this.state.studentList.clear();
+      this.state.loaded = false;
       if (this.state.panelClicked)
         document.getElementById("moreStudents").click();
       this.props.resetDone();
-    }
-
-    if (
+    } else if (
       this.props.attendies &&
-      this.props.attendies.length > 0 &&
-      this.state.loaded === false
+      this.props.attendies.length > 0
+      // this.state.loaded === false
     ) {
       this.props.attendies.map((item) => {
         var isCurrent = false;
         if (item.name === this.props.studentName) isCurrent = true;
         else isCurrent = false;
 
-        this.state.studentList.set(item.id, {
-          name: item.name,
-          selected: isCurrent,
-        });
+        if (!!!this.state.studentList.has(item.id)) {
+          this.state.studentList.set(item.id, {
+            name: item.name,
+            selected: isCurrent,
+          });
+        }
       });
       this.props.addStudent(this.state.studentList);
       this.state.loaded = true;
     }
 
-    console.log("review : " + this.props.fullFeedback);
     return (
       <Accordion className="w-100 d-flex flex-column">
         <div className="p-0 m-0 border-bottom grey pb-1 w-100 text-center">
@@ -156,7 +157,7 @@ class FeedbackContent extends Component {
                 </span>
                 {this.props.attendies && this.props.attendies.length > 1 ? (
                   this.props.attendies.map((item) =>
-                    item.name != this.props.studentName ? (
+                    item.name !== this.props.studentName ? (
                       <div
                         className={
                           "w-20 h-40 p-0 m-0 ml-5 mt-2 mb-2 mr-3 d-flex shadow-sm flex-row border rounded-10 text-uppercase text-11 font-weight-bold text-center justify-content-center" +
@@ -242,7 +243,9 @@ class FeedbackContent extends Component {
                       Teacher's Comment -
                     </span>
                     <p className="pl-1 mt-2 text-verdena text-13 text-dark text-capitalize font-weight-light letter-s1">
-                      {element.comment != "" ? element.comment : "--- none ---"}
+                      {element.comment !== ""
+                        ? element.comment
+                        : "--- none ---"}
                     </p>
                   </span>
                 </div>

@@ -51,6 +51,12 @@ class BatchCard extends Component {
     this.topicSelectionClicked = this.topicSelectionClicked.bind(this);
   }
 
+  resetFeedbackData = () => {
+    this.state.forFeedback.feedback.attendies = "";
+    this.state.forFeedback.feedback.fullFeedback = "";
+    this.state.forFeedback.feedback.studentName = "";
+  };
+
   printBooklet = () => {
     this.state.printBooklet = !this.state.printBooklet;
   };
@@ -212,7 +218,7 @@ class BatchCard extends Component {
       },
       body: JSON.stringify(studentFeedback),
     });
-    if (response.status != 200) {
+    if (response.status !== 200) {
       this.props.feedbackSubmit(true, false, response.status);
     }
     const responseMessage = await response.json();
@@ -221,6 +227,7 @@ class BatchCard extends Component {
       await this.setState({
         batchData: JSON.parse(JSON.stringify(responseMessage.schedule)),
       });
+      this.resetFeedbackData();
       this.props.feedbackSubmit(true, true, responseMessage.message.returnCode);
     } else {
       this.props.feedbackSubmit(

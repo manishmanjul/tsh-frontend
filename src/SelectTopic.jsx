@@ -84,7 +84,7 @@ class SelectTopic extends Component {
   getRightBorderColor(topic) {
     var returnVal = "";
     if (topic.id === this.props.currentTopic.id) {
-      return "bg-warning grey";
+      return "bg-warning green";
     }
     if (this.props.next === true && topic.id === this.props.nextTopic.id) {
       return "bg-info grey";

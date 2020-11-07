@@ -7,10 +7,9 @@ import Login from "./Login";
 import DisplayAllStudents from "./DisplayAllStudents";
 import BatchCardList from "./BatchCardList";
 import { HashRouter, Route, Redirect } from "react-router-dom";
-import BatchPlannerest from "./BatchPlannerest";
-import FeedbackReport from "./FeedbackReport";
-import FeedbackContent from "./FeedbackContent";
+
 import FeedbackSubmit from "./FeedbackSubmit";
+import TopicManagement from "./TopicManagement";
 
 class App extends Component {
   constructor(props) {
@@ -125,7 +124,11 @@ class App extends Component {
               path="/BatchPlanner"
               render={() => <FeedbackSubmit success="true" />}
             />
-
+            <Route
+              exact
+              path="/TopicManagement"
+              render={() => <TopicManagement />}
+            />
             <Footter />
           </div>
         </div>

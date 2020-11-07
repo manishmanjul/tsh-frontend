@@ -23,6 +23,11 @@ class StudentCard extends Component {
     this.clicked = this.clicked.bind(this);
   }
 
+  resetFeedback = () => {
+    this.state.request = "";
+    this.state.fullFeedback.clear();
+  };
+
   clicked(studentName) {
     var request = this.props.requestObj;
     request.step = 1;
@@ -57,7 +62,7 @@ class StudentCard extends Component {
       this.state.feedbackCounter = 0;
       this.prepareFeedbackRequest();
     }
-    if (response.selectedTopic != "") this.props.saveTopic(response);
+    if (response.selectedTopic !== "") this.props.saveTopic(response);
     this.props.progressManager(this.state.request);
   };
 
@@ -159,6 +164,7 @@ class StudentCard extends Component {
     });
 
     this.props.submitFeedback(studentFeedback);
+    this.resetFeedback();
   };
 
   prepareFeedbackRequest = () => {

@@ -112,6 +112,17 @@ class BatchCardList extends Component {
     });
   }
 
+  getAttendiesName = (attendies) => {
+    var names = "";
+    for(var i = 0; i < attendies.length ; i++){
+      names = names + attendies[i].name;
+      if(i < attendies.length -1){
+        names = names + "  |  "; 
+      }
+    }
+    return names;
+  }
+
   render() {
     const batches = this.state.batchData;
     console.log(batches)
@@ -218,10 +229,19 @@ class BatchCardList extends Component {
                       Grade {item.grade}
                     </p>
                   </div>
-                  <div className="d-flex justify-content-center w-77 h-40 m-0 background-grad-grey ">
+                  <div className="d-flex justify-content-center w-57 h-40 m-0 background-grad-grey ">
                     <p className="p-0 m-0 text-darkgrey text-helvetica text-11 font-weight-bold text-uppercase letter-s3 align-self-center ">
                       {item.courseDescription}
                     </p>
+                  </div>
+                  <div className="d-flex justify-content-center w-20 h-40 m-0 background-grey-plus right-border-white left-border-white ">
+                    
+                          {/* // <div className="d-flex justify-content-center w-100 h-40 m-0 background-grey-plus right-border-white1px">                       */}
+                          <p className="p-0 m-0 text-dark text-helvetica text-11 text-capitalize letter-s1 font-weight-bold align-self-center  ">
+                            {this.getAttendiesName(item.attendies)}
+                        </p>
+                        {/* // </div> */}
+                                                              
                   </div>
                   <div className="d-flex w-15 h-40 pr-4 m-0 rounded-top-right-5 rounded-bottom-right-5 border background-grey-plus justify-content-end ">
                     <p className="p-0 m-0 text-lightgrey3 text-helvetica text-11 font-weight-bold align-self-center ">
