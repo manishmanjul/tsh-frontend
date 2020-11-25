@@ -275,6 +275,10 @@ div.next.orange {
   min-width: 20%;
   max-width: 20%;
 }
+.w-22 {
+  min-width: 22%;
+  max-width: 22%;
+}
 .w-24 {
   min-width: 24%;
   max-width: 24%;
@@ -315,6 +319,14 @@ div.next.orange {
   min-width: 95%;
   max-width: 95%;
 }
+.wp-100 {
+  min-width: 100px;
+  max-width: 100px;
+}
+.wp-75 {
+  min-width: 75px;
+  max-width: 75px;
+}
 .wp-60 {
   min-width: 60px;
   max-width: 60px;
@@ -349,6 +361,10 @@ div.next.orange {
 .hp-30 {
   min-height: 25px;
   max-height: 25px;
+}
+.hp-100 {
+  min-height: 200px;
+  max-height: 200px;
 }
 .h-400px {
   min-height: 400px;

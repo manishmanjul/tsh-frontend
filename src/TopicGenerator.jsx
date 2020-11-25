@@ -25,6 +25,12 @@ const TopicGenerator = () => {
   });
 
   const addRemoveTermToResponse = (term) => {
+    setmsgpanel({
+      heading: "",
+      message: "",
+      success: "",
+      value: false,
+    });
     let index = responseData.current.termResponse.findIndex(
       (t) => t.id === term.id
     );
@@ -36,6 +42,13 @@ const TopicGenerator = () => {
   };
 
   const addRemoveGradeToResponse = (grade) => {
+    setmsgpanel({
+      heading: "",
+      message: "",
+      success: "",
+      value: false,
+    });
+
     let index = responseData.current.gradeResponse.findIndex(
       (g) => g.id === grade.id
     );
@@ -47,6 +60,13 @@ const TopicGenerator = () => {
   };
 
   const addRemoveCourseToResponse = (course) => {
+    setmsgpanel({
+      heading: "",
+      message: "",
+      success: "",
+      value: false,
+    });
+
     let index = responseData.current.courseResponse.findIndex(
       (c) => c.id === course.id
     );

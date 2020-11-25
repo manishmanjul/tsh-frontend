@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import Footter from "./Footter";
 import "./tshhome.css";
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css'
+
 import TopHeader from "./TopHeader";
 import Login from "./Login";
 import DisplayAllStudents from "./DisplayAllStudents";
@@ -10,6 +13,13 @@ import { HashRouter, Route, Redirect } from "react-router-dom";
 
 import FeedbackSubmit from "./FeedbackSubmit";
 import TopicManagement from "./TopicManagement";
+import BatchManagement from "./BatchManagement";
+import FileUpload from "./FileUpload";
+
+import BatchManagementExcel from "./BatchManagementExcel";
+import BatchManagementDashboard from "./BatchManagementDashboard";
+import BatchManagementPlanner from "./BatchManagementPlanner";
+import BatchManagementOutlook from "./BatchManagementOutlook";
 
 class App extends Component {
   constructor(props) {
@@ -117,12 +127,32 @@ class App extends Component {
             <Route
               exact
               path="/DisplayAllStudents"
-              render={() => <DisplayAllStudents token={this.state.token} />}
+              render={() => <FileUpload token={this.state.token} />}
             />
             <Route
               exact
               path="/BatchPlanner"
-              render={() => <FeedbackSubmit success="true" />}
+              render={() => <BatchManagement success="true" />}
+            />
+            <Route
+              exact
+              path="/BatchPlanner/Outlook"
+              render={() => <BatchManagementOutlook />}
+            />
+            <Route
+              exact
+              path="/BatchPlanner/Excel"
+              render={() => <BatchManagementExcel success="true" />}
+            />
+            <Route
+              exact
+              path="/BatchPlanner/Dashboard"
+              render={() => <BatchManagementDashboard success="true" />}
+            />
+            <Route
+              exact
+              path="/BatchPlanner/Planner"
+              render={() => <BatchManagementPlanner success="true" />}
             />
             <Route
               exact

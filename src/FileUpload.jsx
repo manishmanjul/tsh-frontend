@@ -46,20 +46,20 @@ class FileUpload extends Component {
 
   render() {
     return (
-      <div className="file-upload-main-container">
-        <div class="custom-file">
+      <div className="file-upload-main-container mt-5">
+        <div className="custom-file">
           <input
             type="file"
-            class="custom-file-input"
+            className="custom-file-input"
             id="customFile"
             onChange={(e) => this.onChange(e)}
           />
-          <label class="custom-file-label" for="customFile">
+          <label className="custom-file-label" for="customFile">
             {this.state.fileselect}
           </label>
         </div>
         <button
-          class="btn-info w-25 m-2 align-self-center rounded-lg shadow-sm"
+          className="btn-info w-25 m-3 align-self-center rounded-lg shadow-sm"
           onClick={(c) => this.onClick(c)}
         >
           Upload

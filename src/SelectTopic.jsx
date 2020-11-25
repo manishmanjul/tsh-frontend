@@ -221,7 +221,7 @@ class SelectTopic extends Component {
                     >
                       <div className="w-75 border-right p-0 m-0 d-flex flex-column justify-content-center">
                         <p className="p-0 m-0 pl-4 large-text letter-s2 text-helvetica">
-                          {topic.description}
+                          {topic.topicName + " - " + topic.description}
                         </p>
                         <p className="p-0 m-0 pl-4 medium-text font-weight-light text-helvetica">
                           {topic.chapter}

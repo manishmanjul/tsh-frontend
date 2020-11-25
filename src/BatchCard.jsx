@@ -262,7 +262,11 @@ class BatchCard extends Component {
                 </button>
                 <div className="d-flex w-75 h-40 pl-3 pb-0 mb-0 background-grad-grey rounded-top-right-5 rounded-bottom-right-5 text-helvetica text-lightgrey3 font-weight-bold medium-text ">
                   <p className="p-0 m-0 align-self-center">
-                    {data.currentTopic.description}
+                    {(data.currentTopic.topicName || "") +
+                      " - " +
+                      data.currentTopic.description +
+                      " - " +
+                      (data.currentTopic.chapter || "")}
                   </p>
                 </div>
               </div>
@@ -285,7 +289,11 @@ class BatchCard extends Component {
                 </button>
                 <div className="d-flex w-75 h-40 pl-3 pb-0 mb-0 background-grad-grey rounded-top-right-5 rounded-bottom-right-5 text-helvetica text-lightgrey3 font-weight-bold medium-text ">
                   <p className="p-0 m-0 align-self-center">
-                    {data.nextTopic.description}
+                    {(data.nextTopic.topicName || "") +
+                      " - " +
+                      data.nextTopic.description +
+                      " - " +
+                      (data.nextTopic.chapter || "")}
                   </p>
                 </div>
               </div>
