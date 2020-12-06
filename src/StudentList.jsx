@@ -9,10 +9,8 @@ const StudentList = (props) => {
     props.callBack(props.keyStud, props.name);
   };
 
-  const getKey = () => {
-    var num = Math.floor(Math.random() * (60 - 1)) + 1;
-
-    return "https://i.pravatar.cc/" + num;
+  const getKey = (name) => {
+    return "https://ui-avatars.com/api/?background=random&name=" + name;
   };
 
   return (
@@ -24,7 +22,7 @@ const StudentList = (props) => {
         <div className="row align-items-center">
           <img
             alt="placeholder"
-            src={getKey()}
+            src={getKey(props.name)}
             className="w-15 rounded-25 m-0 p-0"
           />
           <div className="m-0 p-0 ml-3">
