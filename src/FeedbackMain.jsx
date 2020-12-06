@@ -257,7 +257,7 @@ class FeedbackMain extends Component {
                   <div className="border-grey h-50 w-0px align-self-center p-0 m-0"></div>
                   <p className="text-dark text-11 font-weight-light text-helvetica text-uppercase letter-s3 p-0 m-0">
                     <i className={"" + this.getFeedbackProgressClass(3)} />{" "}
-                    Comment
+                    Assessment
                   </p>
                   <div className="h-50"></div>
                 </div>

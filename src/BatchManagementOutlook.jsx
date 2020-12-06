@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { Circle } from "rc-progress";
 import { useEffect, useState } from "react";
 
@@ -12,11 +12,13 @@ const BatchManagementOutlook = () => {
 
   useEffect(() => {
     var ans = window.confirm(
-      "COnfirm one last time. Do you really want to import from Outlook?"
+      "Confirm... Do you really want to import from Outlook?"
     );
     if (ans) {
       var response = startImport();
       console.log("startImport: " + response);
+    } else {
+      document.getElementById("goback").click();
     }
   }, []);
 
@@ -106,7 +108,7 @@ const BatchManagementOutlook = () => {
             {processStatus.statusMessage}...
           </h5>
         </div>
-        <NavLink to="/BatchPlanner" className="btn btn-info mb-2">
+        <NavLink id="goback" to="/BatchPlanner" className="btn btn-info mb-2">
           Go Back
         </NavLink>
         <button

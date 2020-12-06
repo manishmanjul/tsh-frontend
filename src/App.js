@@ -20,6 +20,8 @@ import BatchManagementExcel from "./BatchManagementExcel";
 import BatchManagementDashboard from "./BatchManagementDashboard";
 import BatchManagementPlanner from "./BatchManagementPlanner";
 import BatchManagementOutlook from "./BatchManagementOutlook";
+import FeedbackManagement from "./FeedbackManagement";
+import NewUser from "./NewUser";
 
 class App extends Component {
   constructor(props) {
@@ -83,7 +85,9 @@ class App extends Component {
     }
   }
 
+  
   render() {
+    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
     return (
       <HashRouter>
         <div className="App-master-container">
@@ -98,17 +102,30 @@ class App extends Component {
             <Route
               exact
               path="/schedule"
-              render={() => (
+              render={() => isLoggedIn? (
                 <BatchCardList
                   features={this.state.features}
                   token={this.state.token}
                   feedbackHandle={this.feedback}
                 />
+              ) :(
+                <Login afterLogin={this.afterLogin} />
               )}
             />
             <Route
               exact
               path="/login"
+              render={() => {
+                return this.state.isLoggedIn === "true" ? (
+                  <Redirect to="/schedule" />
+                ) : (
+                  <Login afterLogin={this.afterLogin} />
+                );
+              }}
+            />
+            <Route
+              exact
+              path="/"
               render={() => {
                 return this.state.isLoggedIn === "true" ? (
                   <Redirect to="/schedule" />
@@ -123,7 +140,11 @@ class App extends Component {
               path="/Logout"
               render={() => <Login afterLogin={this.afterLogin} />}
             />
-
+            <Route
+              exact
+              path="/FeedbackManagement"
+              render={() => <FeedbackManagement />}
+            />
             <Route
               exact
               path="/DisplayAllStudents"
@@ -158,6 +179,11 @@ class App extends Component {
               exact
               path="/TopicManagement"
               render={() => <TopicManagement />}
+            />
+            <Route
+              exact
+              path="/UserManagement"
+              render={() => <NewUser />}
             />
             <Footter />
           </div>

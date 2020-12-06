@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import SingleBatch from "./SingleBatch";
 
 const BatchManagementExcel = () => {
   return (
@@ -12,6 +13,9 @@ const BatchManagementExcel = () => {
         Excel
         <p className="text-danger font-weight-bold">&nbsp; ---</p>
       </p>
+      <div className="w-100 text-dark">
+        <SingleBatch />
+      </div>
       <div className="w-75 align-self-center">
         <NavLink to="/BatchPlanner" className="btn btn-info mb-2">
           Go Back

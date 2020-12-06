@@ -114,18 +114,18 @@ class BatchCardList extends Component {
 
   getAttendiesName = (attendies) => {
     var names = "";
-    for(var i = 0; i < attendies.length ; i++){
+    for (var i = 0; i < attendies.length; i++) {
       names = names + attendies[i].name;
-      if(i < attendies.length -1){
-        names = names + "  |  "; 
+      if (i < attendies.length - 1) {
+        names = names + "  |  ";
       }
     }
     return names;
-  }
+  };
 
   render() {
     const batches = this.state.batchData;
-    console.log(batches)
+    console.log(batches);
     var eventCounter = 1;
     if (this.state.feedbackRefreshRequired) {
       this.fetchFeedbackCategories();
@@ -190,12 +190,20 @@ class BatchCardList extends Component {
           feedbackSubmit={this.feedbackSubmit}
           currentTopic={
             this.state.forFeedback.topic
-              ? this.state.forFeedback.topic.description
+              ? (this.state.forFeedback.topic.topicName || "") +
+                " - " +
+                this.state.forFeedback.topic.description +
+                " - " +
+                (this.state.forFeedback.topic.chapter || "")
               : ""
           }
           nextTopic={
             this.state.forFeedback.nextTopic
-              ? this.state.forFeedback.nextTopic.description
+              ? (this.state.forFeedback.nextTopic.topicName || "") +
+                " - " +
+                this.state.forFeedback.nextTopic.description +
+                " - " +
+                (this.state.forFeedback.nextTopic.chapter || "")
               : ""
           }
         />
@@ -235,13 +243,11 @@ class BatchCardList extends Component {
                     </p>
                   </div>
                   <div className="d-flex justify-content-center w-20 h-40 m-0 background-grey-plus right-border-white left-border-white ">
-                    
-                          {/* // <div className="d-flex justify-content-center w-100 h-40 m-0 background-grey-plus right-border-white1px">                       */}
-                          <p className="p-0 m-0 text-dark text-helvetica text-11 text-capitalize letter-s1 font-weight-bold align-self-center  ">
-                            {this.getAttendiesName(item.attendies)}
-                        </p>
-                        {/* // </div> */}
-                                                              
+                    {/* // <div className="d-flex justify-content-center w-100 h-40 m-0 background-grey-plus right-border-white1px">                       */}
+                    <p className="p-0 m-0 text-dark text-helvetica text-11 text-capitalize letter-s1 font-weight-bold align-self-center  ">
+                      {this.getAttendiesName(item.attendies)}
+                    </p>
+                    {/* // </div> */}
                   </div>
                   <div className="d-flex w-15 h-40 pr-4 m-0 rounded-top-right-5 rounded-bottom-right-5 border background-grey-plus justify-content-end ">
                     <p className="p-0 m-0 text-lightgrey3 text-helvetica text-11 font-weight-bold align-self-center ">

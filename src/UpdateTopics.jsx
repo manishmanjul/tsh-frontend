@@ -91,7 +91,6 @@ const UpdateTopic = () => {
   };
 
   const callServer = async () => {
-    console.log("Call server called");
     const response = await fetch("/tsh/topicmanager/getTopicData", {
       method: "GET",
       headers: {
@@ -110,7 +109,6 @@ const UpdateTopic = () => {
 
   const getTopicsFromServer = async () => {
     if (data.termData.length > 0) {
-      console.log("getopics");
       const response = await fetch("/tsh/topicmanager/getAllTopics", {
         method: "GET",
         headers: {
@@ -131,17 +129,11 @@ const UpdateTopic = () => {
   };
 
   const isCurrent = (term) => {
-    console.log("is current");
     if (term.current) {
       return "term btn btn-outline-secondary wp-60 rounded-10 mr-2 shadow-lg large-text text-helvetica font-weight-bolder active";
     } else {
       return "term btn btn-outline-secondary wp-60 rounded-10 mr-2 shadow-lg large-text text-helvetica font-weight-bolder";
     }
-  };
-
-  const handleReset = () => {
-    setData({ termData: [], gradeData: [], courseData: [] });
-    setreset(!reset);
   };
 
   const doFilter = () => {
@@ -179,15 +171,11 @@ const UpdateTopic = () => {
     setLoaded(true);
   };
 
-  const handleSubmit = () => {};
-
   useEffect(() => {
-    console.log("Use Effect terms");
     callServer();
   }, [reset]);
 
   useEffect(() => {
-    console.log("Use Effect topics");
     getTopicsFromServer();
   }, [data]);
 
@@ -489,16 +477,14 @@ const UpdateTopic = () => {
       },
       body: JSON.stringify(dataToSend),
     });
-    // let responseMessage = response.json();
     let responseCode = await response.status;
     return responseCode;
   };
 
-  const beforeSave = (oldValue, newValue, row, column, done) => {
+  const beforeSave = async (oldValue, newValue, row, column, done) => {
     var ans = window.confirm(
       "Do you really want to change the value of this field?"
     );
-
     if (ans === true) {
       done();
     } else {
@@ -647,23 +633,6 @@ const UpdateTopic = () => {
         ) : (
           <Loading />
         )}
-      </div>
-      <div className="w-75 mt-3 mb-3 d-flex flex-row justify-content-center">
-        <button
-          type="button"
-          className="btn btn-primary mr-4"
-          onClick={() => handleSubmit()}
-          disabled
-        >
-          Update Topics
-        </button>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() => handleReset()}
-        >
-          Reset
-        </button>
       </div>
     </section>
   );

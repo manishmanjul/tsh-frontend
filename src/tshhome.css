@@ -200,7 +200,9 @@ div.next.orange {
 .large-plus1-text {
   font-size: 28px;
 }
-
+.text-25 {
+  font-size: 25px;
+}
 .large-plus-text {
   font-size: 21px;
 }
@@ -263,6 +265,10 @@ div.next.orange {
   min-width: 10%;
   max-width: 10%;
 }
+.w-12 {
+  min-width: 12%;
+  max-width: 12%;
+}
 .w-15 {
   min-width: 15%;
   max-width: 15%;
@@ -291,6 +297,10 @@ div.next.orange {
   min-width: 49%;
   max-width: 49%;
 }
+.w-47 {
+  min-width: 47%;
+  max-width: 47%;
+}
 .w-35 {
   min-width: 35%;
   max-width: 35%;
@@ -306,6 +316,10 @@ div.next.orange {
 .w-80 {
   min-width: 80%;
   max-width: 80%;
+}
+.w-82 {
+  min-width: 82%;
+  max-width: 82%;
 }
 .w-85 {
   min-width: 85%;
@@ -340,6 +354,10 @@ div.next.orange {
   max-width: 300px;
 }
 
+.h-0 {
+  max-height: 0px;
+  min-height: 0px;
+}
 .h-50 {
   min-height: 50px;
 }
@@ -352,6 +370,11 @@ div.next.orange {
 .h-10 {
   min-height: 10px;
 }
+
+.h-75 {
+  min-height: 76px;
+}
+
 .h-70 {
   min-height: 150px;
 }
@@ -413,6 +436,9 @@ div.next.orange {
 .text-high-tower {
   font-family: "High Tower Text";
 }
+.rounded-25 {
+  border-radius: 25px;
+}
 .rounded-20 {
   border-radius: 20px;
 }
@@ -448,6 +474,10 @@ div.next.orange {
 }
 .rounded-top-right-5 {
   border-top-right-radius: 5px;
+}
+.rounded-top-right-n-10 {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 .rounded-bottom-right-10 {
   border-bottom-right-radius: 10px;
@@ -606,6 +636,15 @@ div.next.orange {
 .border-bottom.grey {
   border-bottom: solid 10px rgb(184, 185, 185);
 }
+.border-b-grey {
+  border-bottom: solid 0px rgb(184, 185, 185);
+}
+.border-t-grey {
+  border-top: solid 1px rgb(184, 185, 185);
+}
+.border-025 {
+  border: solid 0.001px rgb(227, 233, 233);
+}
 .rt {
   margin-right: 1px;
 }
@@ -686,4 +725,24 @@ div.list-group-item:focus {
 .course.btn.btn-outline-secondary.active.active,
 .course.btn.btn-outline-secondary.active:active {
   background-color: rgb(3, 184, 93);
+}
+
+.studList.active {
+  background-color: red;
+  color: yellow;
+}
+.scroll {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+.pagination.active {
+  background-color: rgb(137, 216, 240);
+}
+.brint-front {
+  z-index: 1;
+  position: absolute;
+}
+.send-back {
+  z-index: -1;
+  position: relative;
 }
