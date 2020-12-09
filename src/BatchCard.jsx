@@ -15,6 +15,7 @@ class BatchCard extends Component {
         NEXT_CLASS: 2,
         printBooklet: false,
         submitFeedback: false,
+        markAbsent: { mark: false, studName: "", message: "", type: "" },
         forFeedback: {
           step: 0,
           forTopic: {
@@ -50,6 +51,46 @@ class BatchCard extends Component {
     }
     this.topicSelectionClicked = this.topicSelectionClicked.bind(this);
   }
+
+  markAbsent = async (name, studId) => {
+    let reqObject = { id: studId };
+    const response = await fetch("/tsh/student/markAbsent", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reqObject),
+    });
+
+    const result = await response.json();
+    if (result.returnCode === 1) {
+      this.setState({
+        markAbsent: {
+          mark: true,
+          studName: name,
+          message: " has been marked absent for today",
+          type: "success",
+        },
+      });
+    } else {
+      this.setState({
+        markAbsent: {
+          mark: true,
+          studName: "",
+          message:
+            "Something went wrong!!! Unable to mark '" +
+            name +
+            "' absent. Server did not respond. Try again later",
+          type: "danger",
+        },
+      });
+    }
+  };
+
+  postAbsent = () => {
+    this.setState({ markAbsent: { mark: false, studName: "" } });
+  };
 
   resetFeedbackData = () => {
     this.state.forFeedback.feedback.attendies = "";
@@ -359,18 +400,48 @@ class BatchCard extends Component {
             </div>
           </Card.Subtitle>
           <Card.Text>
-            <div className="d-flex flex-row justify-content-around pt-5 pl-0 pr-0">
-              {data.attendies.map((student) => (
-                <StudentCard
-                  profile={this.state.profile}
-                  student={student}
-                  progressManager={this.progressManager}
-                  requestObj={this.state.forFeedback}
-                  saveTopic={this.setTopic}
-                  feedbackMasterData={this.props.feedbackMaster}
-                  submitFeedback={this.submitFeedback}
-                />
-              ))}
+            <div className="d-flex flex-column pt-3">
+              {this.state.markAbsent.mark ? (
+                <div
+                  className={
+                    "alert w-100 mt-2 d-flex flex-row justify-content-between alert-" +
+                    this.state.markAbsent.type
+                  }
+                  role="alert"
+                  onClick={() => this.postAbsent()}
+                >
+                  <h5 className="alert-heading">
+                    <span className="font-weight-bold">
+                      {this.state.markAbsent.studName}{" "}
+                    </span>
+                    {this.state.markAbsent.message}
+                  </h5>
+                  <button
+                    type="button"
+                    className={"btn btn-" + this.state.markAbsent.type}
+                    onclick={() => this.postAbsent()}
+                  >
+                    OK
+                  </button>
+                </div>
+              ) : (
+                <></>
+              )}
+              <div className="d-flex flex-row justify-content-around pl-0 pr-0">
+                {data.attendies.map((student) => (
+                  <StudentCard
+                    profile={this.state.profile}
+                    student={student}
+                    progressManager={this.progressManager}
+                    requestObj={this.state.forFeedback}
+                    saveTopic={this.setTopic}
+                    feedbackMasterData={this.props.feedbackMaster}
+                    submitFeedback={this.submitFeedback}
+                    evtKey={this.props.evtKey}
+                    markAbsent={this.markAbsent}
+                  />
+                ))}
+              </div>
             </div>
           </Card.Text>
         </Card.Body>

@@ -14,11 +14,28 @@ class StudentCardMenu extends Component {
         title=""
         className="p-0 m-0 rounded-lg border-top-0 border-right-0 border-bottom-0"
       >
-        <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-        <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-        <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+        <Dropdown.Item
+          className="medium-plus-text text-darkgrey text-Palatino"
+          eventKey={this.props.evtKey}
+          onClick={() =>
+            this.props.markAbsent(
+              this.props.studName,
+              this.props.studentBatchId
+            )
+          }
+        >
+          Mark Absent
+        </Dropdown.Item>
+        <Dropdown.Item className="medium-plus-text text-darkgrey text-Palatino">
+          View Topic Progress
+        </Dropdown.Item>
+        <Dropdown.Item className="medium-plus-text text-darkgrey text-Palatino">
+          View/Manage Feeback
+        </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+        <Dropdown.Item className="medium-plus-text text-darkgrey text-Palatino">
+          Report Concerns
+        </Dropdown.Item>
       </DropdownButton>
     );
   }

@@ -207,7 +207,12 @@ class StudentCard extends Component {
             </span>
           </div>
           <div>
-            <StudentCardMenu />
+            <StudentCardMenu
+              evtKey={this.props.evtKey}
+              markAbsent={this.props.markAbsent}
+              studName={data.name}
+              studentBatchId={data.id}
+            />
           </div>
         </Card.Header>
         <Card.Body

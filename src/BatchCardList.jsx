@@ -238,19 +238,19 @@ class BatchCardList extends Component {
                     </p>
                   </div>
                   <div className="d-flex justify-content-center w-57 h-40 m-0 background-grad-grey ">
-                    <p className="p-0 m-0 text-darkgrey text-helvetica text-11 font-weight-bold text-uppercase letter-s3 align-self-center ">
-                      {item.courseDescription}
+                    <p className="p-0 m-0 text-darkgrey text-helvetica text-12 font-weight-bold text-uppercase letter-s3 align-self-center ">
+                      {this.getAttendiesName(item.attendies)}
                     </p>
                   </div>
-                  <div className="d-flex justify-content-center w-20 h-40 m-0 background-grey-plus right-border-white left-border-white ">
+                  <div className="d-flex justify-content-center w-15 h-40 m-0 background-grey-plus right-border-white left-border-white ">
                     {/* // <div className="d-flex justify-content-center w-100 h-40 m-0 background-grey-plus right-border-white1px">                       */}
-                    <p className="p-0 m-0 text-dark text-helvetica text-11 text-capitalize letter-s1 font-weight-bold align-self-center  ">
-                      {this.getAttendiesName(item.attendies)}
+                    <p className="p-0 m-0 text-dark text-helvetica text-12 text-capitalize letter-s1 font-weight-bold align-self-center  ">
+                      {item.courseDescription}
                     </p>
                     {/* // </div> */}
                   </div>
-                  <div className="d-flex w-15 h-40 pr-4 m-0 rounded-top-right-5 rounded-bottom-right-5 border background-grey-plus justify-content-end ">
-                    <p className="p-0 m-0 text-lightgrey3 text-helvetica text-11 font-weight-bold align-self-center ">
+                  <div className="d-flex w-20 h-40 pr-4 m-0 rounded-top-right-5 rounded-bottom-right-5 border background-grey-plus justify-content-end ">
+                    <p className="p-0 m-0 text-darkgrey text-helvetica text-12 font-weight-bold align-self-center ">
                       {item.day + " " + item.startTime + " - " + item.endTime}
                     </p>
                   </div>
@@ -267,6 +267,7 @@ class BatchCardList extends Component {
                     feedbackReviewSelector={this.launchFeedbackReviewSelector}
                     feedbackMasterCount={this.state.feedbackMasterCount}
                     feedbackMaster={this.state.feedbackMasterData}
+                    evtKey={eventCounter - 1}
                   />
                 </Accordion.Collapse>
               </Card>
