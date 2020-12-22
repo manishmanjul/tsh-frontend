@@ -88,6 +88,19 @@ class BatchCard extends Component {
     }
   };
 
+  getTopics = async (id) => {
+    const response = await fetch("/tsh/schedule/getBatchTopics/" + id, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + this.props.token,
+      },
+    });
+    if (response.status === 202) {
+      const topics = await response.json();
+      this.state.batchData.topics = topics;
+    }
+  };
+
   postAbsent = () => {
     this.setState({ markAbsent: { mark: false, studName: "" } });
   };
@@ -155,9 +168,9 @@ class BatchCard extends Component {
   };
 
   /* Event method. Called when current and next topic selection is made by ser */
-  topicSelectionClicked(topicDay) {
+  async topicSelectionClicked(topicDay) {
     var temp = this.state.forFeedback.forTopic;
-    temp = this.populateTopicRequestForMandatory(temp);
+    temp = await this.populateTopicRequestForMandatory(temp);
     temp.step = -1;
     if (topicDay === this.state.TODAY) temp.next = false;
     else temp.next = true;
@@ -166,8 +179,12 @@ class BatchCard extends Component {
     this.launchTopicSelector(temp);
   }
 
-  populateTopicRequestForMandatory = (request) => {
+  populateTopicRequestForMandatory = async (request) => {
+    if (this.state.batchData.topics.length <= 0) {
+      await this.getTopics(this.state.batchData.key);
+    }
     request.data = this.state.batchData.topics;
+    console.log(request.data);
     request.currentTopic = this.state.batchData.currentTopic;
     request.nextTopic = this.state.batchData.nextTopic;
     return request;
@@ -197,10 +214,13 @@ class BatchCard extends Component {
     } else {
       tempData.nextTopic = response.selectedTopic;
     }
+    if (tempData.currentTopic.id != "" && tempData.nextTopic.id != "") {
+      this.state.batchData.topics = [];
+    }
     this.setState({ batchData: tempData });
   };
 
-  progressManager = (request) => {
+  progressManager = async (request) => {
     var step = request.step;
     if (step === 0) {
       //this is the reset code
@@ -208,7 +228,7 @@ class BatchCard extends Component {
       return;
     }
     if (step === 1) {
-      var topicRequest = this.populateTopicRequestForMandatory(
+      var topicRequest = await this.populateTopicRequestForMandatory(
         request.forTopic
       );
       this.launchTopicSelector(topicRequest);

@@ -26,7 +26,6 @@ class DisplayAllStudents extends Component {
     });
     const body = await response.json();
     this.setState({ groups: body, isLoading: false });
-    console.log(body);
     if (this.props.setToParent) {
       this.props.setToParent(this.state.groups);
     }

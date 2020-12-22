@@ -22,6 +22,7 @@ import BatchManagementPlanner from "./BatchManagementPlanner";
 import BatchManagementOutlook from "./BatchManagementOutlook";
 import FeedbackManagement from "./FeedbackManagement";
 import NewUser from "./NewUser";
+import FeedbackCategoryManagement from "./FeedbackCategoryManagement";
 
 class App extends Component {
   constructor(props) {
@@ -142,8 +143,13 @@ class App extends Component {
             />
             <Route
               exact
-              path="/FeedbackManagement"
+              path="/FeedbackManagement/Feedback"
               render={() => <FeedbackManagement />}
+            />
+            <Route
+              exact
+              path="/FeedbackManagement/Category"
+              render={() => <FeedbackCategoryManagement />}
             />
             <Route
               exact

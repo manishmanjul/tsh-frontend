@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import FeedbackContanier from "./FeedbackContainer";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
@@ -101,9 +102,24 @@ const FeedbackManagement = () => {
 
   return (
     <div className="w-100 border-grey d-flex flex-column justify-content-center align-content-center">
-      <div className="w-100 d-flex flex-row">
-        <div className="w-20"></div>
-        <div className="w-80 d-flex flex-column text-center">
+      <div className="w-100 d-flex flex-row ">
+        <div className="d-flex flex-row justify-content-left w-20 text-lightgrey3 text-18 pb-2 pl-4">
+          <NavLink
+            className="pl-2 pr-2 m-0 h-55 align-self-center mr-3 feedback rounded"
+            title="Show Students Feedbacks"
+            to={"/FeedbackManagement/Feedback"}
+          >
+            <i className="glyphicon glyphicon-list m-0 mt-1 p-0 align-self-center" />
+          </NavLink>
+          <NavLink
+            className="pl-2 pr-2 pb-2 m-0 h-55 align-self-center feedback border rounded"
+            title="Manage Feedback Categories"
+            to={"/FeedbackManagement/Category"}
+          >
+            <i className="glyphicon glyphicon-file mt-1 mb-1 align-self-center" />
+          </NavLink>
+        </div>
+        <div className="w-80 d-flex flex-column text-center ">
           <p className="text-high-tower font-style-bold text-lightgrey3 text-32 mt-3 mb-0 p-0">
             {student.name === ""
               ? "Feedback Management"
@@ -112,7 +128,7 @@ const FeedbackManagement = () => {
         </div>
       </div>
 
-      <div className="d-flex flex-row w-100 mt-3">
+      <div className="d-flex flex-row w-100 ">
         <div className="w-20">
           <div className="text-high-tower text-uppercase letter-s1 text-center large-text  w-95 background-grad darkblue text-white  ml-3 rounded">
             Student List

@@ -287,8 +287,7 @@ class StudentCard extends Component {
               className="btn btn-danger btn-lg btn-block rounded-lg w-100 background-red text-uppercase letter-s3 sm-text text-helvetica text-lightgrey"
               onClick={() => this.clicked(data.name)}
             >
-              <i className="glyphicon glyphicon-list-alt"></i> Current Feedback
-              Pending
+              <i className="glyphicon glyphicon-list-alt"></i> Enter Feedback
             </button>
           </Card.Footer>
         </Card.Body>

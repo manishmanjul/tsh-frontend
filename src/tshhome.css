@@ -316,6 +316,14 @@ div.next.orange {
   min-width: 57%;
   max-width: 57%;
 }
+.w-60 {
+  min-width: 60%;
+  max-width: 60%;
+}
+.w-70 {
+  min-width: 70%;
+  max-width: 70%;
+}
 .w-80 {
   min-width: 80%;
   max-width: 80%;
@@ -406,6 +414,10 @@ div.next.orange {
 .h-35 {
   min-height: 35%;
   max-height: 35%;
+}
+.h-55 {
+  min-height: 55%;
+  max-height: 55%;
 }
 .h-100 {
   min-height: 100%;
@@ -585,6 +597,9 @@ div.next.orange {
 .background-red {
   background-color: rgba(194, 19, 7, 0.884);
 }
+.background-pink {
+  background-color: rgba(245, 174, 169, 0.884);
+}
 .border-white {
   border: solid 1px white;
 }
@@ -609,6 +624,9 @@ div.next.orange {
 .left-border.blue {
   border-left: solid 7px rgba(250, 67, 21, 0.76);
 }
+.left-border-grey {
+  border-left: solid 1px rgb(235, 232, 232);
+}
 .right-border.green {
   border-right: solid 7px rgb(2, 235, 165);
 }
@@ -617,6 +635,9 @@ div.next.orange {
 }
 .right-border.grey {
   border-right: solid 7px grey;
+}
+.right-border-grey1px {
+  border-right: solid 1px rgb(235, 232, 232);
 }
 .right-border.yellow {
   border-right: solid 7px rgb(225, 228, 73);
@@ -639,8 +660,14 @@ div.next.orange {
 .border-bottom.grey {
   border-bottom: solid 10px rgb(184, 185, 185);
 }
+.bottom-border-grey {
+  border-bottom: solid 1px rgb(235, 232, 232);
+}
 .border-b-grey {
   border-bottom: solid 0px rgb(184, 185, 185);
+}
+.border-b-grey-1 {
+  border-bottom: solid 1px rgb(80, 196, 196);
 }
 .border-t-grey {
   border-top: solid 1px rgb(184, 185, 185);
@@ -734,6 +761,11 @@ div.list-group-item:focus {
   background-color: red;
   color: yellow;
 }
+
+.appList.active {
+  background-color: red;
+  color: yellow;
+}
 .scroll {
   max-height: 80vh;
   overflow-y: scroll;
@@ -741,6 +773,12 @@ div.list-group-item:focus {
 .pagination.active {
   background-color: rgb(137, 216, 240);
 }
+
+.feedback.active {
+  background-color: rgba(4, 151, 119, 0.836);
+  color: white;
+}
+
 .brint-front {
   z-index: 1;
   position: absolute;
@@ -748,4 +786,12 @@ div.list-group-item:focus {
 .send-back {
   z-index: -1;
   position: relative;
+}
+.myGrid:hover {
+  background-color: rgb(225, 228, 228);
+  cursor: pointer;
+}
+
+.myGrid.active {
+  background-color: rgb(234, 250, 246);
 }

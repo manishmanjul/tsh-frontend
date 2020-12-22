@@ -240,26 +240,26 @@ class FeedbackMain extends Component {
               </div>
               <div className="d-flex flex-row w-100">
                 <div className="h-400px m-0 pl-0 pr-0 pt-4 pb-0 w-15 background-grey border-b-card-green shadow-lg border-right d-flex flex-column text-center justify-content-around">
-                  <p className="text-dark text-11 font-weight-light text-helvetica text-uppercase letter-s3 p-0 m-0">
-                    <i className={"" + this.getFeedbackProgressClass(0)} />{" "}
-                    Revision
-                  </p>
-                  <div className="border-grey h-50 w-0px align-self-center p-0 m-0"></div>
-                  <p className="text-dark text-11 font-weight-light text-helvetica text-uppercase letter-s3 p-0 m-0">
-                    <i className={"" + this.getFeedbackProgressClass(1)} />{" "}
-                    Classwork
-                  </p>
-                  <div className="border-grey h-50 w-0px align-self-center p-0 m-0"></div>
-                  <p className="text-dark text-11 font-weight-light text-helvetica text-uppercase letter-s3 p-0 m-0">
-                    <i className={"" + this.getFeedbackProgressClass(2)} />{" "}
-                    Homework
-                  </p>
-                  <div className="border-grey h-50 w-0px align-self-center p-0 m-0"></div>
-                  <p className="text-dark text-11 font-weight-light text-helvetica text-uppercase letter-s3 p-0 m-0">
-                    <i className={"" + this.getFeedbackProgressClass(3)} />{" "}
-                    Assessment
-                  </p>
-                  <div className="h-50"></div>
+                  {this.props.feedbackMaster ? (
+                    this.props.feedbackMaster.map((d, index, ar) => (
+                      <div className="d-flex flex-column text-center justify-content-around">
+                        <p className="text-dark text-11 font-weight-light text-helvetica text-uppercase letter-s3 p-0 m-0">
+                          <i
+                            className={"" + this.getFeedbackProgressClass(0)}
+                          />{" "}
+                          {d.description}
+                        </p>
+                        {index + 1 < this.props.feedbackMaster.length ? (
+                          <div className="border-grey h-50 w-0px align-self-center p-0 m-0"></div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                  ;
                 </div>
                 <div className="text-primary pl-3 w-100 d-flex flex-column">
                   <h4 className="font-weight-bold letter-s1">

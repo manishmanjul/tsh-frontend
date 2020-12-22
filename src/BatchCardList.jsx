@@ -17,6 +17,7 @@ class BatchCardList extends Component {
       greenProfile: "green",
       yellowProfile: "yellow",
       orangeProfile: "orange",
+      expand: "",
       loaded: false,
       batchData: "",
       feedbackMasterData: "",
@@ -96,13 +97,22 @@ class BatchCardList extends Component {
     this.setState({ initFeedback: false });
   };
 
-  async fetchFeedbackCategories() {
-    const response = await fetch("/tsh/feedback/category", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-      },
-    });
+  async fetchFeedbackCategories(myGrade) {
+    if (this.state.expand === myGrade) {
+      this.state.expand = "";
+      return;
+    } else {
+      this.state.expand = myGrade;
+    }
+    const response = await fetch(
+      "/tsh/feedback/category/" + myGrade + "/" + "true",
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + this.props.token,
+        },
+      }
+    );
     const catData = await response.json();
 
     this.setState({
@@ -125,11 +135,7 @@ class BatchCardList extends Component {
 
   render() {
     const batches = this.state.batchData;
-    console.log(batches);
     var eventCounter = 1;
-    if (this.state.feedbackRefreshRequired) {
-      this.fetchFeedbackCategories();
-    }
     if (this.state.loaded === false) {
       return (
         <div className="full-height d-flex flox-row justify-content-center align-items-center background-grey">
@@ -175,6 +181,7 @@ class BatchCardList extends Component {
           step={this.state.forFeedback.step}
           initFeedback={this.state.initFeedback}
           initDone={this.callBackPostInitFeedback}
+          feedbackMaster={this.state.feedbackMasterData}
         />
 
         <FeedbackReport
@@ -222,6 +229,8 @@ class BatchCardList extends Component {
                   as={Card.Header}
                   variant="link"
                   eventKey={eventCounter + ""}
+                  onClick={() => this.fetchFeedbackCategories(item.grade)}
+                  onCollapse={() => console.log("Expanded")}
                   className={
                     "d-flex flex-row justify-content-between align-items-center p-0 m-0 border-0 rounded-5" +
                     this.getProfile(item.course)
