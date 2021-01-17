@@ -14,7 +14,6 @@ class FeedbackBox extends Component {
   }
 
   async boxClicked() {
-    // this.setState({ clicked: !this.state.clicked });
     this.state.clicked = !this.state.clicked;
     if (this.state.clicked) {
       if (this.props.onOnClick)

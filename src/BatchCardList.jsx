@@ -35,7 +35,6 @@ class BatchCardList extends Component {
     this.fetchFeedbackCategories = this.fetchFeedbackCategories.bind(this);
   }
 
-  //This method is pased to the DisplayAllStudents Component. It is a callback method to accept the data from the server.
   acceptData = (data) => {
     if (data) {
       this.setState({
@@ -52,7 +51,6 @@ class BatchCardList extends Component {
     else return this.state.orangeProfile;
   }
 
-  // Construct the text to be displayed for each batch bar.
   constructext(item) {
     var returntext =
       item.day +
@@ -67,8 +65,6 @@ class BatchCardList extends Component {
     return returntext;
   }
 
-  // This method is passed to the BatchCard as a callback method.
-  // It will be called from the BatchCard to launch the topic selector
   launchTopicSelector = (forTopicInput) => {
     this.setState({ forTopic: forTopicInput });
     document.getElementById("topicSelection").style.display = "block";
@@ -90,7 +86,6 @@ class BatchCardList extends Component {
       submitStatus: success,
       errorCode: code,
     });
-    // document.getElementById("feedbackSubmit").style.display = "block";
   };
 
   callBackPostInitFeedback = () => {
@@ -105,7 +100,11 @@ class BatchCardList extends Component {
       this.state.expand = myGrade;
     }
     const response = await fetch(
-      "/tsh/feedback/category/" + myGrade + "/" + "true",
+      sessionStorage.getItem("proxy") +
+        "/tsh/feedback/category/" +
+        myGrade +
+        "/" +
+        "true",
       {
         method: "GET",
         headers: {
@@ -153,8 +152,6 @@ class BatchCardList extends Component {
       <div style={{ width: "100%" }}>
         <SubHeader features={this.props.features} />
 
-        {/*  Add the model components that will be displayed to interact with the user to accept the feedback */}
-        {/* Topic selection model class. */}
         <SelectTopic
           step={this.state.forTopic.step}
           data={this.state.forTopic.data}
@@ -165,7 +162,6 @@ class BatchCardList extends Component {
           resultHandler={this.state.forTopic.resultHandler}
         />
 
-        {/* Feedback section */}
         <FeedbackMain
           studentName={this.state.forFeedback.studentName}
           topic={
@@ -252,11 +248,9 @@ class BatchCardList extends Component {
                     </p>
                   </div>
                   <div className="d-flex justify-content-center w-15 h-40 m-0 background-grey-plus right-border-white left-border-white ">
-                    {/* // <div className="d-flex justify-content-center w-100 h-40 m-0 background-grey-plus right-border-white1px">                       */}
                     <p className="p-0 m-0 text-dark text-helvetica text-12 text-capitalize letter-s1 font-weight-bold align-self-center  ">
                       {item.courseDescription}
                     </p>
-                    {/* // </div> */}
                   </div>
                   <div className="d-flex w-20 h-40 pr-4 m-0 rounded-top-right-5 rounded-bottom-right-5 border background-grey-plus justify-content-end ">
                     <p className="p-0 m-0 text-darkgrey text-helvetica text-12 font-weight-bold align-self-center ">

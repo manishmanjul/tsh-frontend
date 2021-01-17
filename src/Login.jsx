@@ -9,6 +9,7 @@ class Login extends Component {
       username: "",
       password: "",
       errormsg: "",
+      showSpinner: false,
     };
     this.doLogin = this.doLogin.bind(this);
     this.setusername = this.setusername.bind(this);
@@ -24,6 +25,7 @@ class Login extends Component {
   }
 
   async doLogin() {
+    this.setState({ showSpinner: true });
     if (this.state.username === "" || this.state.password === "") {
       this.setState({ errormsg: "Invalid credentials. Try again..." });
     } else {
@@ -32,19 +34,23 @@ class Login extends Component {
     const formData = new FormData();
     formData.append("userName", this.state.username);
     formData.append("password", this.state.password);
-    const response = await fetch("/tsh/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userName: this.state.username,
-        password: this.state.password,
-      }),
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: this.state.username,
+          password: this.state.password,
+        }),
+      }
+    );
     try {
       const welcome = await response.json();
       if (welcome) {
+        this.setState({ showSpinner: false });
         this.props.afterLogin(welcome.welcomeKit, true, welcome.jwt);
       } else {
         this.setState({ errormsg: "Login Failed" });
@@ -58,6 +64,15 @@ class Login extends Component {
   }
 
   render() {
+    if (this.state.showSpinner === true) {
+      return (
+        <div className="full-height d-flex flox-row justify-content-center align-items-center background-grey">
+          <div className="spinner-border text-info" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="full-height text-dark d-flex flex-row mt-ng-1 pt-0">
         <img

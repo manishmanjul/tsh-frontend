@@ -91,13 +91,16 @@ const UpdateTopic = () => {
   };
 
   const callServer = async () => {
-    const response = await fetch("/tsh/topicmanager/getTopicData", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/topicmanager/getTopicData",
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const tempData = await response.json();
     setData({
@@ -109,13 +112,16 @@ const UpdateTopic = () => {
 
   const getTopicsFromServer = async () => {
     if (data.termData.length > 0) {
-      const response = await fetch("/tsh/topicmanager/getAllTopics", {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        sessionStorage.getItem("proxy") + "/tsh/topicmanager/getAllTopics",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const tempTopics = await response.json();
       setTopics(tempTopics);
       var currenterm = data.termData.filter((t) => t.current === true);
@@ -469,14 +475,17 @@ const UpdateTopic = () => {
   ];
 
   const submitToServer = async (dataToSend) => {
-    const response = await fetch("/tsh/topicmanager/update", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/topicmanager/update",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      }
+    );
     let responseCode = await response.status;
     return responseCode;
   };

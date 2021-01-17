@@ -137,7 +137,6 @@ class StudentCard extends Component {
       students: [],
     };
 
-    // create a student object
     Array.from(response.studentList.keys()).map((key) => {
       if (response.studentList.get(key).selected === true) {
         let stud = {
@@ -163,8 +162,13 @@ class StudentCard extends Component {
       );
     });
 
-    this.props.submitFeedback(studentFeedback);
-    this.resetFeedback();
+    if (studentFeedback.feedbacks.length == 0) {
+      window.alert("No Feedback found. Atleast provide one feedback");
+      this.resetFeedback();
+    } else {
+      this.props.submitFeedback(studentFeedback);
+      this.resetFeedback();
+    }
   };
 
   prepareFeedbackRequest = () => {

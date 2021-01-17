@@ -112,13 +112,16 @@ const TopicGenerator = () => {
 
   const callServer = async () => {
     console.log("Call server called");
-    const response = await fetch("/tsh/topicmanager/getTopicData", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/topicmanager/getTopicData",
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const tempData = await response.json();
     setData({
@@ -130,15 +133,17 @@ const TopicGenerator = () => {
 
   const submitToServer = async () => {
     const dataToSend = responseData.current;
-    const response = await fetch("/tsh/topicmanager/submit", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    });
-    // let responseMessage = response.json();
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/topicmanager/submit",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      }
+    );
     let responseCode = await response.status;
     if (responseCode !== 200) {
       setmsgpanel({

@@ -96,11 +96,7 @@ class FeedbackContent extends Component {
       if (this.state.panelClicked)
         document.getElementById("moreStudents").click();
       this.props.resetDone();
-    } else if (
-      this.props.attendies &&
-      this.props.attendies.length > 0
-      // this.state.loaded === false
-    ) {
+    } else if (this.props.attendies && this.props.attendies.length > 0) {
       this.props.attendies.map((item) => {
         var isCurrent = false;
         if (item.name === this.props.studentName) isCurrent = true;

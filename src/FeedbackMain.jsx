@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import FeedbackBox from "./FeedbackBox";
-import Loading from "./Loading";
 
 class FeedbackMain extends Component {
   constructor(props) {
@@ -37,14 +36,6 @@ class FeedbackMain extends Component {
 
   async next() {
     this.setState({ isGoBack: false, resetFeedbacks: true });
-    if (this.state.feedbackObj.items.size <= 0) {
-      this.state.retainFeedback = true;
-      this.setState({
-        errorMessage: "- No Feedback found. Enter/Select a Feedback.",
-      });
-      return;
-    }
-
     this.callBackResultHandler();
     this.clearFeedbacks();
   }
@@ -68,7 +59,6 @@ class FeedbackMain extends Component {
     }, 1);
   };
 
-  /*this method is called back by the feedback box afer performing the reset. here is no other way to communicate back*/
   resetDone() {
     this.setState({ resetFeedbacks: false });
   }
@@ -96,10 +86,6 @@ class FeedbackMain extends Component {
     }
   }
 
-  /* This method will return icon class for the progress tracker that tracks the feedback.
-  Revision, Classwork, homework , comment base on the feedbackCounter and total number of 
-  feedback master data*/
-
   getFeedbackProgressClass(selfCtr) {
     var ctr = this.props.feedbackCounter;
     if (ctr === selfCtr) return "glyphicon glyphicon-play text-primary text-11";
@@ -124,8 +110,6 @@ class FeedbackMain extends Component {
     this.setState({ feedbackObj: temp });
   };
 
-  /* If Back button is clicked then goBack flag is set to true. 
-  In case it is true, the animation should change. Return the correct animation CSS class*/
   getAnimationCLass() {
     if (this.state.isGoBack) {
       return "w3-animate-top";

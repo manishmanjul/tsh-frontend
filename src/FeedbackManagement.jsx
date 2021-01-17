@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import FeedbackContanier from "./FeedbackContainer";
+import FeedbackManagementHeader from "./FeedbackManagementHeader";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
 import StudentList from "./StudentList";
@@ -25,14 +25,18 @@ const FeedbackManagement = () => {
   const getSingleStudentFeedback = async (studId) => {
     let reqObject = { id: studId };
 
-    const response = await fetch("/tsh/feedback/getSingleStudentFeedback", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(reqObject),
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") +
+        "/tsh/feedback/getSingleStudentFeedback",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reqObject),
+      }
+    );
 
     const result = await response.json();
     setDataCount(result.topics.length);
@@ -40,13 +44,16 @@ const FeedbackManagement = () => {
   };
 
   const getStudentsFromServer = async () => {
-    const response = await fetch("/tsh/student/getStudents", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/student/getStudents",
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const tempStudets = await response.json();
     setStudents(tempStudets);
     setStudent({ id: tempStudets[2].id, name: tempStudets[2].name });
@@ -67,14 +74,17 @@ const FeedbackManagement = () => {
       teacherId: topic.providers[0].teacher.id,
     };
     if (window.confirm("Are you sure you want to delete this feedback?")) {
-      const response = await fetch("/tsh/feedback/deleteFeedback", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(deleteSubject),
-      });
+      const response = await fetch(
+        sessionStorage.getItem("proxy") + "/tsh/feedback/deleteFeedback",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(deleteSubject),
+        }
+      );
       const resultMessage = await response.json();
       console.log(resultMessage.returnCode + " ::" + resultMessage.message);
       getSingleStudentFeedback(topic.providers[0].studentBatch.id);
@@ -85,14 +95,17 @@ const FeedbackManagement = () => {
     var dataToSend = { element: htmlElement, studentBatchId: studId };
     console.log("Inside Feedbaxck Management");
     if (window.confirm("Are you sure you want to email this feedback?")) {
-      const response = await fetch("/tsh/mail/send", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const response = await fetch(
+        sessionStorage.getItem("proxy") + "/tsh/mail/send",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
       const resultMessage = await response.json();
       if (resultMessage.returnCode === 1) {
         setFeedbackSent(true);
@@ -100,33 +113,14 @@ const FeedbackManagement = () => {
     }
   };
 
+  const getHeading = () => {
+    if (student.name === "") return "Feedback Management";
+    else return "Feedback Of " + student.name;
+  };
+
   return (
     <div className="w-100 border-grey d-flex flex-column justify-content-center align-content-center">
-      <div className="w-100 d-flex flex-row ">
-        <div className="d-flex flex-row justify-content-left w-20 text-lightgrey3 text-18 pb-2 pl-4">
-          <NavLink
-            className="pl-2 pr-2 m-0 h-55 align-self-center mr-3 feedback rounded"
-            title="Show Students Feedbacks"
-            to={"/FeedbackManagement/Feedback"}
-          >
-            <i className="glyphicon glyphicon-list m-0 mt-1 p-0 align-self-center" />
-          </NavLink>
-          <NavLink
-            className="pl-2 pr-2 pb-2 m-0 h-55 align-self-center feedback border rounded"
-            title="Manage Feedback Categories"
-            to={"/FeedbackManagement/Category"}
-          >
-            <i className="glyphicon glyphicon-file mt-1 mb-1 align-self-center" />
-          </NavLink>
-        </div>
-        <div className="w-80 d-flex flex-column text-center ">
-          <p className="text-high-tower font-style-bold text-lightgrey3 text-32 mt-3 mb-0 p-0">
-            {student.name === ""
-              ? "Feedback Management"
-              : "Feedback Of " + student.name}
-          </p>
-        </div>
-      </div>
+      <FeedbackManagementHeader heading={getHeading()} />
 
       <div className="d-flex flex-row w-100 ">
         <div className="w-20">

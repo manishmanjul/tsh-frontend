@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const NewFeedbackCategory = ({ grade }) => {
+const NewFeedbackCategory = ({ grade, refresh, source }) => {
   const [validation, setValidation] = useState({
     descProp: "",
     descMsg: "Description",
@@ -66,12 +66,65 @@ const NewFeedbackCategory = ({ grade }) => {
         orderMsg: "Order",
       });
     }
+    addCategory();
+  };
+
+  const addCategory = async () => {
+    const dataToSend = {
+      description: description,
+      active: true,
+      order: order,
+      grade: grade,
+    };
+    var gradeText = grade == 0 ? "Default Category?" : "Grade " + grade + "?";
+    var ans = window.confirm(
+      "Do you really want to add " +
+        description +
+        " as a Feedback Category for " +
+        gradeText
+    );
+    if (!ans) return;
+
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/feedback/category/addCategory",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      }
+    );
+
+    if (response.status === 202) {
+      setStatus({
+        code: 1,
+        msg:
+          "Successfully created a new Feedback Category : " +
+          description +
+          " for " +
+          gradeText,
+      });
+    } else {
+      setStatus({
+        code: 2,
+        msg: "Something went wrong " + response.statusText,
+      });
+    }
   };
 
   useEffect(() => {
     setDescription("");
     setOrder("");
   }, [grade]);
+
+  const clearModel = () => {
+    setStatus({ code: 0, msg: "" });
+    setDescription("");
+    setOrder("");
+    if (status.code == 1) refresh(true, source);
+  };
 
   return (
     <section className="w-100 d-flex flex-column justify-content-center align-items-center border mt-5 background-grey-plus shadow-lg">
@@ -128,7 +181,18 @@ const NewFeedbackCategory = ({ grade }) => {
           <h4 className="alert-heading">
             {status.code === 1 ? "Success !!" : "!! Error !!"}
           </h4>
-          {status.msg}
+          <p>{status.msg}</p>
+          <button
+            type="button"
+            className={
+              status.code === 1
+                ? "btn btn-sm btn-success"
+                : "btn btn-sm btn-danger"
+            }
+            onClick={() => clearModel()}
+          >
+            OK
+          </button>
         </div>
       ) : (
         <></>

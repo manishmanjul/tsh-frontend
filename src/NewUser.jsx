@@ -14,13 +14,16 @@ const NewUser = () => {
   });
 
   const getAllTeachers = async () => {
-    const response = await fetch("/tsh/Signup/getTeachers", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/Signup/getTeachers",
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+      }
+    );
     var result = await response.json();
     setTeachers(result);
   };
@@ -39,14 +42,17 @@ const NewUser = () => {
 
   const isUserExist = async () => {
     var datatoSend = { request: username };
-    const response = await fetch("/tsh/Signup/isExist", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(datatoSend),
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/Signup/isExist",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datatoSend),
+      }
+    );
     const resultMessage = await response.json();
     if (resultMessage.returnCode === 1) {
       return true;
@@ -64,14 +70,17 @@ const NewUser = () => {
       role: "Teacher1",
       teacherName: teacherSelection + "",
     };
-    const response = await fetch("/tsh/Signup", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(datatoSend),
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/Signup",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datatoSend),
+      }
+    );
     const resultMessage = await response.json();
     return resultMessage;
   };
@@ -103,16 +112,6 @@ const NewUser = () => {
       });
       return;
     }
-
-    // if (await isUserExist()) {
-    //   setAlert({
-    //     flag: "danger",
-    //     heading: "Invalid Username",
-    //     message:
-    //       "The username selected is already in use. Please select another username.",
-    //   });
-    //   return;
-    // }
 
     var result = await registerNewUser();
     if (result.returnCode === 1) {

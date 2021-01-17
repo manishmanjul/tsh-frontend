@@ -233,15 +233,20 @@ div.next.orange {
 .text-danger {
   color: red;
 }
-.text-danger {
-  color: red;
-}
+
 .large-plus-text {
   font-size: 18px;
+}
+.full-height-120 {
+  min-height: 120vh;
+  min-width: 100%;
 }
 .full-height {
   min-height: 80vh;
   min-width: 100%;
+}
+.full-height-5 {
+  min-height: 120vh;
 }
 .height-100 {
   height: auto;
@@ -255,6 +260,14 @@ div.next.orange {
 .w-0px {
   min-width: 0%;
   max-width: 0%;
+}
+.w-2 {
+  min-width: 2%;
+  max-width: 2%;
+}
+.w-2p5 {
+  min-width: 2.5%;
+  max-width: 2.5%;
 }
 .w-5 {
   min-width: 5%;
@@ -291,6 +304,14 @@ div.next.orange {
 .w-24 {
   min-width: 24%;
   max-width: 24%;
+}
+.w-35 {
+  min-width: 35%;
+  max-width: 35%;
+}
+.w-40 {
+  min-width: 40%;
+  max-width: 40%;
 }
 .w-50p {
   min-width: 50%;
@@ -344,6 +365,14 @@ div.next.orange {
   min-width: 95%;
   max-width: 95%;
 }
+.w-96 {
+  min-width: 96%;
+  max-width: 96%;
+}
+.w-98 {
+  min-width: 98%;
+  max-width: 98%;
+}
 .wp-100 {
   min-width: 100px;
   max-width: 100px;
@@ -386,8 +415,21 @@ div.next.orange {
   min-height: 76px;
 }
 
+.h-90px {
+  min-height: 95px;
+  max-height: 95px;
+}
+
+.h-100px {
+  min-height: 100px;
+  max-height: 100px;
+}
+
 .h-70 {
   min-height: 150px;
+}
+.h-170 {
+  min-height: 170px;
 }
 .h-80 {
   min-height: 220px;
@@ -422,6 +464,10 @@ div.next.orange {
 .h-100 {
   min-height: 100%;
   max-height: 100%;
+}
+.h-90 {
+  min-height: 90%;
+  max-height: 90%;
 }
 .button-height-40 {
   min-height: 40px;
@@ -478,6 +524,10 @@ div.next.orange {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+.rounded-right-10 {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
 .rounded-top-left-10 {
   border-top-left-radius: 10px;
 }
@@ -525,6 +575,9 @@ div.next.orange {
 }
 .background-grey-plus2 {
   background-color: rgb(185, 184, 184);
+}
+.background-grey-plus3 {
+  background-color: rgb(88, 93, 100);
 }
 .background-blue {
   background-color: rgb(25, 153, 212);
@@ -600,11 +653,21 @@ div.next.orange {
 .background-pink {
   background-color: rgba(245, 174, 169, 0.884);
 }
+.background-dark-blue {
+  background-color: rgb(3, 72, 94);
+}
 .border-white {
   border: solid 1px white;
 }
 .border-grey {
   border: solid 1px rgb(224, 222, 222);
+}
+
+.border-grey-2 {
+  border: solid 1px rgb(163, 158, 158);
+}
+.border-grey-3 {
+  border: solid 1px rgb(114, 109, 109);
 }
 .border-green {
   border: solid 2px rgb(5, 223, 157);
@@ -654,6 +717,9 @@ div.next.orange {
 .left-border-white {
   border-left: solid 2px white;
 }
+.left-border-white1px {
+  border-left: solid 0.1px white;
+}
 .border-b-card-green {
   border-bottom: solid 10px rgb(6, 156, 144);
 }
@@ -672,8 +738,11 @@ div.next.orange {
 .border-t-grey {
   border-top: solid 1px rgb(184, 185, 185);
 }
-.border-025 {
-  border: solid 0.001px rgb(227, 233, 233);
+.border-t-025 {
+  border-top: solid 0.001px rgb(227, 233, 233);
+}
+.border-dot-grey {
+  border: dotted 1px rgb(239, 241, 241);
 }
 .rt {
   margin-right: 1px;
@@ -779,14 +848,29 @@ div.list-group-item:focus {
   color: white;
 }
 
-.brint-front {
-  z-index: 1;
-  position: absolute;
-}
-.send-back {
-  z-index: -1;
+.z-4 {
   position: relative;
+  z-index: 4;
 }
+
+.z-5 {
+  position: relative;
+  z-index: 5;
+}
+
+.z-6 {
+  position: relative;
+  z-index: 6;
+}
+.z-7 {
+  position: relative;
+  z-index: 7;
+}
+.z-8 {
+  position: relative;
+  z-index: 8;
+}
+
 .myGrid:hover {
   background-color: rgb(225, 228, 228);
   cursor: pointer;
@@ -794,4 +878,7 @@ div.list-group-item:focus {
 
 .myGrid.active {
   background-color: rgb(234, 250, 246);
+}
+.mb-6 {
+  margin-bottom: 3%;
 }

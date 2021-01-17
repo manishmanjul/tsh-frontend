@@ -18,12 +18,15 @@ class DisplayAllStudents extends Component {
       (today.getMonth() + 1) +
       "/" +
       today.getFullYear();
-    const response = await fetch("/tsh/schedule?date=" + today, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.state.token,
-      },
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/schedule",
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + this.state.token,
+        },
+      }
+    );
     const body = await response.json();
     this.setState({ groups: body, isLoading: false });
     if (this.props.setToParent) {
@@ -32,25 +35,7 @@ class DisplayAllStudents extends Component {
   }
 
   render() {
-    // const { groups, isLoading } = this.state;
-    // if (isLoading) {
-    //   return <p className="text-dark">Loading...</p>;
-    // }
-
-    return (
-      // <div className="text-dark large-text">
-      //   <h2> List of students </h2>
-      //   <ul>
-      //     {groups.map((group) => (
-      //       <li key={group.key}>
-      //         {group.day} : {group.startTime} - Grade: {group.grade}{" "}
-      //         {group.course} {group.teacherName}
-      //       </li>
-      //     ))}
-      //   </ul>
-      // </div>
-      <div></div>
-    );
+    return <div></div>;
   }
 }
 

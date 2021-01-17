@@ -31,13 +31,16 @@ class FileUpload extends Component {
         const formData = new FormData();
         formData.append("file", this.state.fileToRead);
         formData.append("command", this.state.command);
-        const response = fetch(this.state.postUrl, {
-          method: "POST",
-          header: {
-            "Content-Type": "multipart/form-data",
-          },
-          body: formData,
-        });
+        const response = fetch(
+          sessionStorage.getItem("proxy") + this.state.postUrl,
+          {
+            method: "POST",
+            header: {
+              "Content-Type": "multipart/form-data",
+            },
+            body: formData,
+          }
+        );
 
         console.log(response);
       };

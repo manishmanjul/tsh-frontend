@@ -7,11 +7,9 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 
 import TopHeader from "./TopHeader";
 import Login from "./Login";
-import DisplayAllStudents from "./DisplayAllStudents";
 import BatchCardList from "./BatchCardList";
 import { HashRouter, Route, Redirect } from "react-router-dom";
 
-import FeedbackSubmit from "./FeedbackSubmit";
 import TopicManagement from "./TopicManagement";
 import BatchManagement from "./BatchManagement";
 import FileUpload from "./FileUpload";
@@ -27,7 +25,8 @@ import FeedbackCategoryManagement from "./FeedbackCategoryManagement";
 class App extends Component {
   constructor(props) {
     super(props);
-
+    // sessionStorage.setItem("proxy", "https://austsh.com:8443");
+    sessionStorage.setItem("proxy", "http://localhost:8080");
     this.state = {
       isLoggedIn: false,
       username: "",

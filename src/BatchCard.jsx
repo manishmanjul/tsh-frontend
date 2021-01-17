@@ -54,14 +54,17 @@ class BatchCard extends Component {
 
   markAbsent = async (name, studId) => {
     let reqObject = { id: studId };
-    const response = await fetch("/tsh/student/markAbsent", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(reqObject),
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/student/markAbsent",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reqObject),
+      }
+    );
 
     const result = await response.json();
     if (result.returnCode === 1) {
@@ -89,12 +92,15 @@ class BatchCard extends Component {
   };
 
   getTopics = async (id) => {
-    const response = await fetch("/tsh/schedule/getBatchTopics/" + id, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-      },
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/schedule/getBatchTopics/" + id,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + this.props.token,
+        },
+      }
+    );
     if (response.status === 202) {
       const topics = await response.json();
       this.state.batchData.topics = topics;
@@ -167,7 +173,6 @@ class BatchCard extends Component {
     return request;
   };
 
-  /* Event method. Called when current and next topic selection is made by ser */
   async topicSelectionClicked(topicDay) {
     var temp = this.state.forFeedback.forTopic;
     temp = await this.populateTopicRequestForMandatory(temp);
@@ -206,7 +211,6 @@ class BatchCard extends Component {
     return request;
   };
 
-  /* Call back method for topic selection model window to accept the result of selection */
   setTopic = (response) => {
     var tempData = this.state.batchData;
     if (response.next === false) {
@@ -223,7 +227,6 @@ class BatchCard extends Component {
   progressManager = async (request) => {
     var step = request.step;
     if (step === 0) {
-      //this is the reset code
       this.setState({ feedbackStep: 0, counter: 1 });
       return;
     }
@@ -240,7 +243,7 @@ class BatchCard extends Component {
       this.launchFeedbackSelector(feedbackRequest);
     }
     if (step === 3) {
-      var nextTopicRequest = this.populateTopicRequestForMandatory(
+      var nextTopicRequest = await this.populateTopicRequestForMandatory(
         request.forTopic
       );
       nextTopicRequest = this.prepareForNextTopicSelection(nextTopicRequest);
@@ -285,14 +288,17 @@ class BatchCard extends Component {
 
   submitToServer = async (studentFeedback) => {
     document.getElementById("feedbackSubmit").style.display = "block";
-    const response = await fetch("/tsh/feedback/submit", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(studentFeedback),
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/feedback/submit",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(studentFeedback),
+      }
+    );
     if (response.status !== 200) {
       this.props.feedbackSubmit(true, false, response.status);
     }

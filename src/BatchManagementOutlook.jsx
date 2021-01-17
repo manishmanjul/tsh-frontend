@@ -33,14 +33,17 @@ const BatchManagementOutlook = () => {
 
   const getStatus = async () => {
     console.log("Status called");
-    const response = await fetch("/tsh/process/status", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ processId: processStatus.psCode }),
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/process/status",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ processId: processStatus.psCode }),
+      }
+    );
     let responseCode = await response.status;
     var status = await response.json();
     if (processStatus.percentage < 100) {
@@ -59,14 +62,16 @@ const BatchManagementOutlook = () => {
 
   const startImport = async () => {
     console.log("Import called");
-    const response = await fetch("/tsh/process/importFromOutlook", {
-      method: "POST",
-      headers: {
-        // eslint-disable-next-line
-        Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      sessionStorage.getItem("proxy") + "/tsh/process/importFromOutlook",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+      }
+    );
     let responseCode = await response.status;
     var pscode = await response.json();
 
