@@ -257,11 +257,11 @@ class StudentCard extends Component {
                     }
                   >
                     {item.description}
-                    <a
+                    {/* <a
                       href="#"
                       title="Change Feedback"
                       className="glyphicon glyphicon-pencil text-danger border-0"
-                    />
+                    /> */}
                   </div>
                   {item.feedbacks ? (
                     item.feedbacks.map((feedback) => (

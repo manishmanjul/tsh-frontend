@@ -118,7 +118,9 @@ const FeedbackTemplate = ({ topic }) => {
           <span>
             Feedback By:{" "}
             <span style={{ color: "red" }}>
-              {topic.providers[0].teacher.teacherName}
+              {topic.providers[0].userTO == null
+                ? topic.providers[0].teacher.teacherName
+                : topic.providers[0].userTO.name}
             </span>
           </span>
         </p>

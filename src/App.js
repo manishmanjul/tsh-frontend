@@ -21,6 +21,7 @@ import BatchManagementOutlook from "./BatchManagementOutlook";
 import FeedbackManagement from "./FeedbackManagement";
 import NewUser from "./NewUser";
 import FeedbackCategoryManagement from "./FeedbackCategoryManagement";
+import ChangePass from "./ChangePass";
 
 class App extends Component {
   constructor(props) {
@@ -85,7 +86,15 @@ class App extends Component {
     }
   }
 
-  
+  isFisrtLogin = () => {
+    var welcome = JSON.parse(sessionStorage.getItem("welcomeKit"));
+    if (welcome.user.firstLogin) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     var isLoggedIn = sessionStorage.getItem("isLoggedIn");
     return (
@@ -102,15 +111,17 @@ class App extends Component {
             <Route
               exact
               path="/schedule"
-              render={() => isLoggedIn? (
-                <BatchCardList
-                  features={this.state.features}
-                  token={this.state.token}
-                  feedbackHandle={this.feedback}
-                />
-              ) :(
-                <Login afterLogin={this.afterLogin} />
-              )}
+              render={() => isLoggedIn ? (
+                this.isFisrtLogin() ?
+                  <ChangePass logout={this.logout} />
+                  : <BatchCardList
+                    features={this.state.features}
+                    token={this.state.token}
+                    feedbackHandle={this.feedback}
+                  />
+              ) : (
+                  <Login afterLogin={this.afterLogin} />
+                )}
             />
             <Route
               exact
@@ -119,8 +130,8 @@ class App extends Component {
                 return this.state.isLoggedIn === "true" ? (
                   <Redirect to="/schedule" />
                 ) : (
-                  <Login afterLogin={this.afterLogin} />
-                );
+                    <Login afterLogin={this.afterLogin} />
+                  );
               }}
             />
             <Route
@@ -130,8 +141,8 @@ class App extends Component {
                 return this.state.isLoggedIn === "true" ? (
                   <Redirect to="/schedule" />
                 ) : (
-                  <Login afterLogin={this.afterLogin} />
-                );
+                    <Login afterLogin={this.afterLogin} />
+                  );
               }}
             />
 

@@ -1,52 +1,78 @@
 import React from "react";
 
-const SingleBatch = () => {
+const SingleBatch = ({ batch }) => {
+  const getBGColor = () => {
+    if (batch.cancelled) {
+      return "grey";
+    } else {
+      return batch.bgColor;
+    }
+  };
+
+  const getFontColor = () => {
+    if (batch.cancelled) {
+      return "black";
+    } else {
+      return batch.fontColor;
+    }
+  };
+
   return (
-    <div className="w-12 h-170 p-0 m-0 d-flex flex-column justify-content-between batchList blue  shadow rounded border-grey">
+    <div
+      className="w-16 h-170 p-0 mb-4 mt-2 ml-4 d-flex flex-column justify-content-between shadow-sm rounded border-grey"
+      style={{ background: getBGColor() }}
+    >
       <div className="d-flex flex-column p-0 m-0 w-100 background-grey-plus3 text-dark shadow-lg rounded bottom-border-grey">
         <p className="text-white text-Palatino font-weight-bold text-14 letter-s2 align-self-center p-0 pr-1 m-0">
-          11:15 AM
+          {batch.startTime}
         </p>
       </div>
-      <div className="d-flex flex-column flex-grow-1 justify-content-start text-center text-white">
+      <div
+        className="d-flex flex-column flex-grow-1 justify-content-start text-center"
+        style={{ color: getFontColor() }}
+      >
         <div className="d-flex flex-row justify-content-between bottom-border-grey w-100 pb-0 align-self-start">
           <div className="text-center pl-2">
-            <p className="letter-s3 pt-1 text-uppercase text-10 text-verdena font-weight-bold pt-1 pb-0 mb-0">
-              CR#
+            <p className="pt-1 text-10 text-verdena font-weight-bold pt-1 pb-0 mb-0">
+              Room #
             </p>
             <p className="letter-s1 text-Capitalize text-12 text-verdena p-0 m-0 pb-0 pt-0 mb-0">
               0
             </p>
           </div>
           <div className="flex-grow-1 pr-3 text-center">
-            <p className="letter-s3 pt-1 text-uppercase text-10 text-georgia font-weight-bold pb-0 mb-0">
-              Maths
+            <p className="pt-1 text-11 text-georgia font-weight-bold pb-0 mb-0">
+              {batch.course}
             </p>
             <p className="letter-s1 text-Capitalize text-10 text-georgia pb-0 mb-0">
-              Manish
+              {batch.teacher.teacherName}
             </p>
           </div>
           <div className="text-25 text-Palatino font-weight-bold mr-2 mt-0 p-0">
-            <p className="p-0 m-0 ">7</p>
+            <p className="p-0 m-0 ">{batch.grade}</p>
           </div>
         </div>
-        <div className="w-100 pl-3 pb-2 pt-2 d-flex flex-column flex-grow-1 justify-content-around align-items-start">
-          <span className="p-0 m-0 ml-3 text-11 text-georgia text-center text-uppercase letter-s2">
-            <input type="checkbox" className="mr-3" />
-            Nikhil
-          </span>
-          <span className="p-0 m-0 ml-3 text-11 text-georgia text-center text-uppercase letter-s2">
-            <input type="checkbox" className="mr-3" />
-            Tegbir
-          </span>
-          <span className="p-0 m-0 ml-3 text-11 text-georgia text-center text-uppercase letter-s2">
-            <input type="checkbox" className="mr-3" />
-            Daniel
-          </span>
-          <span className="p-0 m-0 ml-3 text-11 text-georgia text-center text-uppercase letter-s2">
-            <input type="checkbox" className="mr-3" />
-            Krish
-          </span>
+        <div className="w-100 pb-2 pt-2 d-flex flex-column flex-grow-1 justify-content-around align-items-start">
+          {batch.studentList ? (
+            batch.studentList.map((s) => (
+              <span
+                key={s.id}
+                className="p-0 m-0 ml-2 text-11 text-georgia text-uppercase letter-s1"
+              >
+                <input type="checkbox" className="mr-2" />
+                {s.name}
+              </span>
+            ))
+          ) : (
+            <></>
+          )}
+          {batch.cancelled ? (
+            <span className="w-100 p-0 text-14 text-georgia text-uppercase align-self-center bg-danger text-white letter-s3">
+              CANCELLED
+            </span>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div className="w-100 d-flex flex-row align-self-end text-dark justify-content-between text-center pt-1 pl-3 pr-3 pb-1 background-grey rounded">

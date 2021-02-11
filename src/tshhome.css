@@ -289,6 +289,10 @@ div.next.orange {
   min-width: 15%;
   max-width: 15%;
 }
+.w-16 {
+  min-width: 16%;
+  max-width: 16%;
+}
 .w-18 {
   min-width: 18%;
   max-width: 18%;
@@ -881,4 +885,8 @@ div.list-group-item:focus {
 }
 .mb-6 {
   margin-bottom: 3%;
+}
+
+.myGrid.active {
+  background-color: rgb(136, 54, 58);
 }

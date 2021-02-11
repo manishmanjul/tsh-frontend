@@ -75,7 +75,10 @@ const FeedbackContainer = ({ topic, deleteFeedback, emailFeedback }) => {
       ))}
       <section className="d-flex flex-row justify-content-between border-t-grey bg-danger text-13 mt-3">
         <div className="w-50 text-white text-left text-11 font-weight-bold pl-3">
-          Feedback by - {topic.providers[0].teacher.teacherName}
+          Feedback by -{" "}
+          {topic.providers[0].userTO == null
+            ? topic.providers[0].teacher.teacherName
+            : topic.providers[0].userTO.name}
         </div>
         <div className="w-50  text-right">
           <i

@@ -22,14 +22,14 @@ const BatchManagementOutlook = () => {
     }
   }, []);
 
-  useEffect(() => {
-    var status = "";
-    if (processStatus.psCode !== 0) {
-      setTimeout(() => {
-        status = getStatus();
-      }, 2000);
-    }
-  }, [processStatus]);
+  // useEffect(() => {
+  //   var status = "";
+  //   if (processStatus.psCode !== 0) {
+  //     setTimeout(() => {
+  //       status = getStatus();
+  //     }, 2000);
+  //   }
+  // }, [processStatus]);
 
   const getStatus = async () => {
     console.log("Status called");

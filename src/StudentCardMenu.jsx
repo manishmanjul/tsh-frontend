@@ -26,7 +26,7 @@ class StudentCardMenu extends Component {
         >
           Mark Absent
         </Dropdown.Item>
-        <Dropdown.Item className="medium-plus-text text-darkgrey text-Palatino">
+        {/* <Dropdown.Item className="medium-plus-text text-darkgrey text-Palatino">
           View Topic Progress
         </Dropdown.Item>
         <Dropdown.Item className="medium-plus-text text-darkgrey text-Palatino">
@@ -35,7 +35,7 @@ class StudentCardMenu extends Component {
         <Dropdown.Divider />
         <Dropdown.Item className="medium-plus-text text-darkgrey text-Palatino">
           Report Concerns
-        </Dropdown.Item>
+        </Dropdown.Item> */}
       </DropdownButton>
     );
   }

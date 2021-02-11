@@ -81,52 +81,56 @@ class Login extends Component {
           src={backimage}
         />
         <div className="d-flex justify-content-center align-items-center text-dark height-100 w-50 background-light-grey">
-          <div className="min-width-80 height-40 mb-5 pb-5 grey-light-border d-flex flex-column rounded-20 align-items-center background-white shadow">
-            <span className="medium-text text-danger font-weight-bold mt-2">
-              {this.state.errormsg}
-            </span>
-            <span className="text-verdena font-weight-bold text-dark large-plus-text mt-3 pt-5">
-              {" "}
-              Login to Continue
-            </span>
-            <input
-              type="text"
-              className="form-control form-control-lg w-75 mt-5 button-height-50 rounded-10"
-              id="login"
-              placeholder="email:  johndoe@example.com"
-              onChange={this.setusername}
-              tabIndex="1"
-            />
-            <input
-              type="password"
-              className="form-control form-control-lg w-75 mt-5 rounded-10 button-height-50"
-              id="password"
-              placeholder="password"
-              onChange={this.setpassword}
-              tabIndex="2"
-            />
-            <div className="custom-control custom-checkbox w-75 mt-3 d-flex flex-row justify-content-between">
+          <form
+            className="form-inline w-100 d-flex justify-content-center align-items-center"
+            onSubmit={this.doLogin}
+          >
+            <div className="min-width-80 height-40 mb-5 pb-5 grey-light-border d-flex flex-column rounded-20 align-items-center background-white shadow">
+              <span className="medium-text text-danger font-weight-bold mt-2">
+                {this.state.errormsg}
+              </span>
+              <span className="text-verdena font-weight-bold text-dark large-plus-text mt-3 pt-5">
+                {" "}
+                Login to Continue
+              </span>
               <input
-                type="checkbox"
-                className="custom-control-input"
-                id="customCheck1"
+                type="text"
+                className="form-control form-control-lg w-75 mt-5 button-height-50 rounded-10"
+                id="login"
+                placeholder="email:  johndoe@example.com"
+                onChange={this.setusername}
+                tabIndex="1"
               />
-              <label className="custom-control-label" for="customCheck1">
-                Remember me
-              </label>
-              <a href="http://localhost:3000" className="smaller-text">
-                Forgot Password?
-              </a>
+              <input
+                type="password"
+                className="form-control form-control-lg w-75 mt-5 rounded-10 button-height-50"
+                id="password"
+                placeholder="password"
+                onChange={this.setpassword}
+                tabIndex="2"
+              />
+              <div className="custom-control custom-checkbox w-75 mt-3 d-flex flex-row justify-content-between">
+                <input
+                  type="checkbox"
+                  className="custom-control-input"
+                  id="customCheck1"
+                />
+                <label className="custom-control-label" for="customCheck1">
+                  Remember me
+                </label>
+                <a href="http://localhost:3000" className="smaller-text">
+                  Forgot Password?
+                </a>
+              </div>
+              <button
+                type="submit"
+                className="mt-5 mb-4 button-height-40 rounded-10 medium-plus-text w-50 btn btn-primary text-center text-justify"
+                tabIndex="3"
+              >
+                Login
+              </button>
             </div>
-            <button
-              type="button"
-              className="mt-5 mb-4 button-height-40 rounded-10 medium-plus-text w-50 btn btn-primary text-center text-justify"
-              onClick={this.doLogin}
-              tabIndex="3"
-            >
-              Login
-            </button>
-          </div>
+          </form>
         </div>
       </div>
     );

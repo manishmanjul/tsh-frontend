@@ -91,25 +91,22 @@ const FeedbackManagement = () => {
     }
   };
 
-  const emailFeedback = async (htmlElement, studId) => {
+  const emailFeedback = (htmlElement, studId) => {
     var dataToSend = { element: htmlElement, studentBatchId: studId };
     console.log("Inside Feedbaxck Management");
     if (window.confirm("Are you sure you want to email this feedback?")) {
-      const response = await fetch(
-        sessionStorage.getItem("proxy") + "/tsh/mail/send",
-        {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + sessionStorage.getItem("jwt"),
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataToSend),
-        }
-      );
-      const resultMessage = await response.json();
-      if (resultMessage.returnCode === 1) {
-        setFeedbackSent(true);
-      }
+      fetch(sessionStorage.getItem("proxy") + "/tsh/mail/send", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
+      // const resultMessage = response.json();
+      // if (resultMessage.returnCode === 1) {
+      setFeedbackSent(true);
+      // }
     }
   };
 

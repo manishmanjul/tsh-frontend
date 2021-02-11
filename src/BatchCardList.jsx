@@ -8,6 +8,7 @@ import FeedbackMain from "./FeedbackMain";
 import DisplayAllStudents from "./DisplayAllStudents";
 import FeedbackReport from "./FeedbackReport";
 import FeedbackSubmit from "./FeedbackSubmit";
+import Loading from "./Loading";
 
 class BatchCardList extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class BatchCardList extends Component {
       expand: "",
       loaded: false,
       batchData: "",
+      selectedBatchData: "",
       feedbackMasterData: "",
       feedbackMasterCount: 0,
       feedbackRefreshRequired: true,
@@ -29,6 +31,7 @@ class BatchCardList extends Component {
       submitResult: false,
       submitStatus: false,
       errorCode: 100,
+      filters: { maths: true, english: true, ga: true },
     };
     this.constructext = this.constructext.bind(this);
     this.getProfile = this.getProfile.bind(this);
@@ -92,8 +95,9 @@ class BatchCardList extends Component {
     this.setState({ initFeedback: false });
   };
 
-  async fetchFeedbackCategories(myGrade) {
-    if (this.state.expand === myGrade) {
+  async fetchFeedbackCategories(myGrade, batchDetailId) {
+    console.log("clicked..");
+    if (this.state.expand == myGrade) {
       this.state.expand = "";
       return;
     } else {
@@ -114,10 +118,24 @@ class BatchCardList extends Component {
     );
     const catData = await response.json();
 
+    const response2 = await fetch(
+      sessionStorage.getItem("proxy") +
+        "/tsh/schedule/getBatchData/" +
+        batchDetailId,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + this.props.token,
+        },
+      }
+    );
+    const bData = await response2.json();
+
     this.setState({
       feedbackMasterData: catData,
       feedbackMasterCount: catData.length,
       feedbackRefreshRequired: false,
+      selectedBatchData: bData,
     });
   }
 
@@ -130,6 +148,51 @@ class BatchCardList extends Component {
       }
     }
     return names;
+  };
+
+  isFiltered = (b) => {
+    var teacherPassed = false;
+    var subjectPassed = false;
+
+    if (b.course.includes("Maths")) {
+      if (this.state.filters.maths) {
+        subjectPassed = true;
+      } else {
+        subjectPassed = false;
+      }
+    }
+
+    if (b.course.includes("English")) {
+      if (this.state.filters.english) {
+        subjectPassed = true;
+      } else {
+        subjectPassed = false;
+      }
+    }
+
+    if (b.course.includes("GA")) {
+      if (this.state.filters.ga) {
+        subjectPassed = true;
+      } else {
+        subjectPassed = false;
+      }
+    }
+
+    var welcome = JSON.parse(sessionStorage.getItem("welcomeKit"));
+    let teacher = welcome.teacher.teacherName;
+    if (!this.state.filters.showAllActive) {
+      if (b.teacherName.includes(teacher)) teacherPassed = true;
+      else teacherPassed = false;
+    } else {
+      teacherPassed = true;
+    }
+
+    if (subjectPassed && teacherPassed) return true;
+    else return false;
+  };
+
+  setFilter = (filter) => {
+    this.setState({ filters: filter });
   };
 
   render() {
@@ -150,7 +213,7 @@ class BatchCardList extends Component {
     }
     return (
       <div style={{ width: "100%" }}>
-        <SubHeader features={this.props.features} />
+        <SubHeader features={this.props.features} setFilter={this.setFilter} />
 
         <SelectTopic
           step={this.state.forTopic.step}
@@ -219,62 +282,82 @@ class BatchCardList extends Component {
 
         <Accordion style={{ width: "100%" }}>
           {batches ? (
-            batches.map((item) => (
-              <Card style={{ width: "100%" }} className="m-0 p-0 shadow-lg">
-                <Accordion.Toggle
-                  as={Card.Header}
-                  variant="link"
-                  eventKey={eventCounter + ""}
-                  onClick={() => this.fetchFeedbackCategories(item.grade)}
-                  onCollapse={() => console.log("Expanded")}
-                  className={
-                    "d-flex flex-row justify-content-between align-items-center p-0 m-0 border-0 rounded-5" +
-                    this.getProfile(item.course)
-                  }
-                >
-                  <div
+            batches
+              .filter((b) => this.isFiltered(b))
+              .map((item) => (
+                <Card style={{ width: "100%" }} className="m-0 p-0 shadow-lg">
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    variant="link"
+                    eventKey={eventCounter + ""}
+                    tabindex="0"
+                    focus
+                    onClick={() =>
+                      this.fetchFeedbackCategories(item.grade, item.key)
+                    }
                     className={
-                      "d-flex pl-4 w-8 m-0 h-40 text-center rounded-top-left-5 rounded-bottom-left-5 batchList " +
+                      "d-flex flex-row justify-content-between align-items-center p-0 m-0 border-0 rounded-5" +
                       this.getProfile(item.course)
                     }
                   >
-                    <p className="p-0 m-0 text-helvetica text-11 font-weight-bold align-self-center text-uppercase letter-s2 ">
-                      Grade {item.grade}
-                    </p>
-                  </div>
-                  <div className="d-flex justify-content-center w-57 h-40 m-0 background-grad-grey ">
-                    <p className="p-0 m-0 text-darkgrey text-helvetica text-12 font-weight-bold text-uppercase letter-s3 align-self-center ">
-                      {this.getAttendiesName(item.attendies)}
-                    </p>
-                  </div>
-                  <div className="d-flex justify-content-center w-15 h-40 m-0 background-grey-plus right-border-white left-border-white ">
-                    <p className="p-0 m-0 text-dark text-helvetica text-12 text-capitalize letter-s1 font-weight-bold align-self-center  ">
-                      {item.courseDescription}
-                    </p>
-                  </div>
-                  <div className="d-flex w-20 h-40 pr-4 m-0 rounded-top-right-5 rounded-bottom-right-5 border background-grey-plus justify-content-end ">
-                    <p className="p-0 m-0 text-darkgrey text-helvetica text-12 font-weight-bold align-self-center ">
-                      {item.day + " " + item.startTime + " - " + item.endTime}
-                    </p>
-                  </div>
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey={"" + eventCounter++}>
-                  <BatchCard
-                    profile={this.getProfile(item.course)}
-                    data={item}
-                    feedbackHandle={this.props.feedbackHandle}
-                    token={this.props.token}
-                    topicSelector={this.launchTopicSelector}
-                    feedbackSelector={this.launchFeedbackSelector}
-                    feedbackSubmit={this.launchFeedbackSubmit}
-                    feedbackReviewSelector={this.launchFeedbackReviewSelector}
-                    feedbackMasterCount={this.state.feedbackMasterCount}
-                    feedbackMaster={this.state.feedbackMasterData}
-                    evtKey={eventCounter - 1}
-                  />
-                </Accordion.Collapse>
-              </Card>
-            ))
+                    <div
+                      className={
+                        "d-flex pl-4 w-8 m-0 h-40 text-center rounded-top-left-5 rounded-bottom-left-5 batchList " +
+                        this.getProfile(item.course)
+                      }
+                    >
+                      <p className="p-0 m-0 text-helvetica text-11 font-weight-bold align-self-center text-uppercase letter-s2 ">
+                        Grade {item.grade}
+                      </p>
+                    </div>
+                    <div className="d-flex justify-content-center w-57 h-40 m-0 background-grad-grey ">
+                      <p className="p-0 m-0 text-darkgrey text-helvetica text-12 font-weight-bold text-uppercase letter-s3 align-self-center ">
+                        {this.getAttendiesName(item.attendies)}
+                      </p>
+                    </div>
+                    <div className="d-flex justify-content-center w-15 h-40 m-0 background-grey-plus right-border-white left-border-white ">
+                      <p className="p-0 m-0 text-dark text-helvetica text-12 text-capitalize letter-s1 font-weight-bold align-self-center  ">
+                        {item.courseDescription}
+                      </p>
+                    </div>
+                    <div className="d-flex w-20 h-40 pr-4 m-0 rounded-top-right-5 rounded-bottom-right-5 border background-grey-plus justify-content-end ">
+                      <p className="p-0 m-0 text-darkgrey text-helvetica text-12 font-weight-bold align-self-center ">
+                        {item.day + " " + item.startTime + " - " + item.endTime}
+                      </p>
+                    </div>
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey={"" + eventCounter++}>
+                    {this.state.selectedBatchData.key == item.key ? (
+                      <BatchCard
+                        profile={this.getProfile(
+                          this.state.selectedBatchData.course
+                        )}
+                        data={this.state.selectedBatchData}
+                        feedbackHandle={this.props.feedbackHandle}
+                        token={this.props.token}
+                        topicSelector={this.launchTopicSelector}
+                        feedbackSelector={this.launchFeedbackSelector}
+                        feedbackSubmit={this.launchFeedbackSubmit}
+                        feedbackReviewSelector={
+                          this.launchFeedbackReviewSelector
+                        }
+                        feedbackMasterCount={this.state.feedbackMasterCount}
+                        feedbackMaster={this.state.feedbackMasterData}
+                        evtKey={eventCounter - 1}
+                      />
+                    ) : (
+                      <div className="w-100 d-flex flox-row justify-content-center align-items-center bg-secondary">
+                        <div
+                          className="spinner-border text-info mt-2 mb-2 "
+                          role="status"
+                        >
+                          <span className="sr-only">Loading...</span>
+                        </div>
+                      </div>
+                    )}
+                  </Accordion.Collapse>
+                </Card>
+              ))
           ) : (
             <div></div>
           )}

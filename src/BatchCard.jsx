@@ -256,6 +256,7 @@ class BatchCard extends Component {
   };
 
   constructTopicName = (topic) => {
+    if (topic === null) return;
     var topicName = "";
     if (topic.topicName === null) topicName = "";
     else topicName = topic.topicName;
