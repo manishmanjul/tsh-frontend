@@ -349,6 +349,10 @@ div.next.orange {
   min-width: 70%;
   max-width: 70%;
 }
+.w-72 {
+  min-width: 72%;
+  max-width: 72%;
+}
 .w-80 {
   min-width: 80%;
   max-width: 80%;
@@ -364,6 +368,10 @@ div.next.orange {
 .w-90 {
   min-width: 88%;
   max-width: 88%;
+}
+.w-93 {
+  min-width: 89%;
+  max-width: 89%;
 }
 .w-95 {
   min-width: 95%;
@@ -414,7 +422,10 @@ div.next.orange {
 .h-10 {
   min-height: 10px;
 }
-
+.h-25 {
+  min-height: 25px;
+  max-height: 25px;
+}
 .h-75 {
   min-height: 76px;
 }
@@ -461,6 +472,7 @@ div.next.orange {
   min-height: 35%;
   max-height: 35%;
 }
+
 .h-55 {
   min-height: 55%;
   max-height: 55%;
@@ -519,6 +531,10 @@ div.next.orange {
 .rounded-left-10 {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+}
+.rounded-left-5 {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .rounded-right-20 {
   border-top-right-radius: 20px;
@@ -595,6 +611,10 @@ div.next.orange {
 .background-green {
   background-color: rgb(6, 156, 144);
 }
+.background-lightgreen {
+  background-color: rgb(225, 250, 231);
+}
+
 .batchList.green {
   background-color: rgb(31, 128, 115);
 }
@@ -638,6 +658,15 @@ div.next.orange {
     rgb(122, 178, 252)
   );
 }
+
+.background-grad.grey3 {
+  background-image: linear-gradient(
+    to right,
+    rgb(79, 80, 82),
+    rgb(194, 196, 199)
+  );
+}
+
 .background-grad-greyplus {
   background-image: linear-gradient(
     to right,
@@ -666,7 +695,13 @@ div.next.orange {
 .border-grey {
   border: solid 1px rgb(224, 222, 222);
 }
-
+.border-grey-light {
+  border: solid 1px rgb(240, 238, 238);
+}
+.border-grey-light-right-bottom {
+  border-right: solid 1px rgb(240, 238, 238);
+  border-bottom: solid 1px rgb(240, 238, 238);
+}
 .border-grey-2 {
   border: solid 1px rgb(163, 158, 158);
 }
@@ -813,6 +848,12 @@ div.list-group-item:focus {
 .cur-pointer {
   cursor: pointer;
 }
+
+.disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
 .term.btn.btn-outline-secondary.active.active,
 .term.btn.btn-outline-secondary.active:active {
   background-color: rgb(3, 184, 93);
@@ -889,4 +930,8 @@ div.list-group-item:focus {
 
 .myGrid.active {
   background-color: rgb(136, 54, 58);
+}
+.stick-on-top {
+  position: sticky;
+  top: 47px;
 }

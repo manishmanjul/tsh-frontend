@@ -22,12 +22,13 @@ import FeedbackManagement from "./FeedbackManagement";
 import NewUser from "./NewUser";
 import FeedbackCategoryManagement from "./FeedbackCategoryManagement";
 import ChangePass from "./ChangePass";
+import DataImportResult from "./DataImportResult";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    // sessionStorage.setItem("proxy", "https://austsh.com:8443");
-    sessionStorage.setItem("proxy", "http://localhost:8080");
+    sessionStorage.setItem("proxy", "https://austsh.com:8443");
+    // sessionStorage.setItem("proxy", "http://localhost:8080");
     this.state = {
       isLoggedIn: false,
       username: "",
@@ -168,27 +169,32 @@ class App extends Component {
             />
             <Route
               exact
-              path="/BatchPlanner"
+              path="/Management"
               render={() => <BatchManagement success="true" />}
             />
             <Route
               exact
-              path="/BatchPlanner/Outlook"
+              path="/Management/Outlook"
               render={() => <BatchManagementOutlook />}
+            />
+             <Route
+              exact
+              path="/Management/Import/Result"
+              render={() => <DataImportResult />}
             />
             <Route
               exact
-              path="/BatchPlanner/Excel"
+              path="/Management/Excel"
               render={() => <BatchManagementExcel success="true" />}
             />
             <Route
               exact
-              path="/BatchPlanner/Dashboard"
+              path="/Dashboard"
               render={() => <BatchManagementDashboard success="true" />}
             />
             <Route
               exact
-              path="/BatchPlanner/Planner"
+              path="/Management/Planner"
               render={() => <BatchManagementPlanner success="true" />}
             />
             <Route

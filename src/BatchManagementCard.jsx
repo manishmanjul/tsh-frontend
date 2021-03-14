@@ -8,7 +8,7 @@ const BatchManagementCard = ({ heading, subHeading, msg, btnText, url }) => {
       <div className="card-body">
         <h4 className="card-title">{subHeading}</h4>
         <p className="card-text text-Georgia text-13">{msg}</p>
-        <NavLink to={"/BatchPlanner/" + heading} className="btn btn-primary">
+        <NavLink to={"/Management/" + url} className="btn btn-primary">
           {btnText}
         </NavLink>
       </div>

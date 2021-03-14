@@ -18,8 +18,16 @@ const StudentList = (props) => {
       className="list-group list-group-flush list my--3 text-dark ml-3 pl-1 border-b-grey cur-pointer "
       onClick={iWasCicked}
     >
-      <li className={"studList list-group-item " + isActive()} tabIndex="1">
-        <div className="row align-items-center">
+      <li
+        className={
+          props.disabled
+            ? "studList list-group-item background-grey-plus text-lightgrey2 " +
+              isActive()
+            : "studList list-group-item " + isActive()
+        }
+        tabIndex="1"
+      >
+        <div className="row align-items-center ">
           <img
             alt="placeholder"
             src={getKey(props.name)}

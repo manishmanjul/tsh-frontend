@@ -27,7 +27,7 @@ class FeedbackReport extends Component {
     this.props.resultHandler(this.state.response);
   };
 
-  submit = () => {    
+  submit = () => {
     this.state.response.next = true;
     this.state.response.goBack = false;
     this.props.resultHandler(this.state.response);
@@ -168,7 +168,7 @@ class FeedbackReport extends Component {
                 className="btn btn-success rounded-lg ml-4"
                 onClick={this.submit}
               >
-                Review Completed - Submit Feedback
+                Review Completed - Save Feedback
               </button>
             </div>
           </footer>

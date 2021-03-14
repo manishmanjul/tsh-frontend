@@ -168,7 +168,10 @@ const FeedbackCategoryManagement = () => {
   return (
     <Accordion className="w-100">
       <div className="w-100 border-grey d-flex flex-column justify-content-center align-content-center text-dark">
-        <FeedbackManagementHeader heading="Manage Feedback Categories" />
+        <FeedbackManagementHeader
+          heading="Manage Feedback Categories"
+          showFilters="false"
+        />
 
         <div className="d-flex flex-row w-100 pt-1">
           <div className="w-20 ">

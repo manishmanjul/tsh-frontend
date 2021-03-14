@@ -89,13 +89,9 @@ const BatchManagementDashboard = () => {
   return (
     <div className="w-100 border-grey d-flex flex-column justify-content-center align-content-center z-4">
       <p className="text-high-tower font-style-bold text-lightgrey3 text-32 mt-3 mb-0 p-0 align-self-center ">
-        Batch Management
-      </p>
-      <p className="text-high-tower font-style-bold text-lightgrey3 mt-0 mb-0 pb-0 p-0 align-self-center d-flex flex-row">
-        <p className="text-danger pb-0 mb-0 font-weight-bold">--- &nbsp;</p>
         Dashboard
-        <p className="text-danger font-weight-bold mb-0 pb-0 ">&nbsp; ---</p>
       </p>
+
       <div className="w-95 m-0 mb-1 pl-4 d-flex flex-row ">
         <button
           type="button"

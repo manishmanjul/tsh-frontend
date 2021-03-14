@@ -150,9 +150,20 @@ class BatchCardList extends Component {
     return names;
   };
 
+  checkPattern = (nm) => {
+    if (
+      this.state.filters.namePattern == "" ||
+      this.state.filters.namePattern == null
+    )
+      return true;
+    nm.name.includes(this.state.filters.namePattern);
+  };
+
   isFiltered = (b) => {
     var teacherPassed = false;
     var subjectPassed = false;
+    var gradePassed = false;
+    var nameSearchPassed = false;
 
     if (b.course.includes("Maths")) {
       if (this.state.filters.maths) {
@@ -184,10 +195,50 @@ class BatchCardList extends Component {
       if (b.teacherName.includes(teacher)) teacherPassed = true;
       else teacherPassed = false;
     } else {
-      teacherPassed = true;
+      if (b.teacherName == this.state.filters.selectedTeacher)
+        teacherPassed = true;
+      else teacherPassed = false;
+
+      if (
+        this.state.filters.selectedTeacher == "Filter By Teacher" ||
+        this.state.filters.selectedTeacher == "Admin" ||
+        this.state.filters.selectedTeacher == "" ||
+        this.state.filters.selectedTeacher == null
+      )
+        teacherPassed = true;
     }
 
-    if (subjectPassed && teacherPassed) return true;
+    if (
+      b.grade + "" == this.state.filters.selectedGrade ||
+      this.state.filters.selectedGrade == "0" ||
+      this.state.filters.selectedGrade == "" ||
+      this.state.filters.selectedGrade == null
+    ) {
+      gradePassed = true;
+    } else {
+      gradePassed = false;
+    }
+
+    if (
+      this.state.filters.namePattern == null ||
+      this.state.filters.namePattern == ""
+    )
+      nameSearchPassed = true;
+    else {
+      if (b.attendies.length > 0) {
+        for (let idx = 0; idx < b.attendies.length; idx++) {
+          var studName = b.attendies[idx].name.toLowerCase();
+          if (studName.includes(this.state.filters.namePattern.toLowerCase())) {
+            nameSearchPassed = true;
+            idx = b.attendies.length + 1;
+          } else nameSearchPassed = false;
+        }
+      } else {
+        nameSearchPassed = true;
+      }
+    }
+    if (subjectPassed && teacherPassed && gradePassed && nameSearchPassed)
+      return true;
     else return false;
   };
 

@@ -2,7 +2,12 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import FeedbackTemplate from "./FeedbackTemplate";
 
-const FeedbackContainer = ({ topic, deleteFeedback, emailFeedback }) => {
+const FeedbackContainer = ({
+  topic,
+  deleteFeedback,
+  emailFeedback,
+  editFeedback,
+}) => {
   const constructTopicName = (topic) => {
     var topicName = "";
     if (topic.topicName === null) topicName = "";
@@ -24,6 +29,21 @@ const FeedbackContainer = ({ topic, deleteFeedback, emailFeedback }) => {
 
   const mailClicked = (id, studId) => {
     emailFeedback(document.getElementById(id).outerHTML, studId);
+  };
+
+  const getFootter = () => {
+    if (topic.providers[0].updatedBy == null) {
+      if (topic.providers[0].userTO == null)
+        return "Feedback by - " + topic.providers[0].teacher.teacherName;
+      else return "Feedback by - " + topic.providers[0].userTO.name;
+    } else {
+      return (
+        "Last updated by - " +
+        topic.providers[0].updatedBy.name +
+        " on " +
+        topic.providers[0].updatedOn
+      );
+    }
   };
 
   return (
@@ -49,10 +69,6 @@ const FeedbackContainer = ({ topic, deleteFeedback, emailFeedback }) => {
         <section className="pt-3 pl-2">
           <p className="d-flex flex-row justify-content-between text-georgia text-darkgrey large-text text-uppercase letter-s2 m-0 p-0 pl-3">
             <span>{c.description}</span>
-            <i
-              className="glyphicon glyphicon-edit text-right mr-5 pr-5 cur-pointer"
-              title="Edit this Section of feedback"
-            ></i>
           </p>
           <div className="w-90 border border-danger p-0 m-0 mb-3"></div>
           {c.feedbacks.map((fb) => (
@@ -75,10 +91,7 @@ const FeedbackContainer = ({ topic, deleteFeedback, emailFeedback }) => {
       ))}
       <section className="d-flex flex-row justify-content-between border-t-grey bg-danger text-13 mt-3">
         <div className="w-50 text-white text-left text-11 font-weight-bold pl-3">
-          Feedback by -{" "}
-          {topic.providers[0].userTO == null
-            ? topic.providers[0].teacher.teacherName
-            : topic.providers[0].userTO.name}
+          {getFootter()}
         </div>
         <div className="w-50  text-right">
           <i
@@ -87,6 +100,11 @@ const FeedbackContainer = ({ topic, deleteFeedback, emailFeedback }) => {
             onClick={() =>
               mailClicked(topic.id, topic.providers[0].studentBatch.id)
             }
+          ></i>
+          <i
+            className="glyphicon glyphicon-edit text-white mr-3 cur-pointer"
+            title="Edit this Feedback"
+            onClick={() => editFeedback(topic)}
           ></i>
           <i
             className="glyphicon glyphicon-trash text-white mr-3 cur-pointer"

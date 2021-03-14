@@ -7,13 +7,13 @@ const Pagination = ({ dataCount, perPage, callBack }) => {
 
   useEffect(() => {
     let tempArr = [];
-    let max = 1;
-    if (totalPages > 4) max = 4;
-    else max = totalPages;
-    for (var i = 1; i <= max; i++) {
+    let lmax = 1;
+    if (totalPages > 4) lmax = 4;
+    else lmax = totalPages;
+    for (var i = 1; i <= lmax; i++) {
       tempArr.push(i);
     }
-    setPages({ ...pages, myArr: tempArr });
+    setPages({ min: 1, max: lmax, page: 1, myArr: tempArr });
   }, [totalPages]);
 
   const handleClick = (pageSelected) => {
@@ -29,7 +29,7 @@ const Pagination = ({ dataCount, perPage, callBack }) => {
       newMax = 4;
     }
     if (pageSelected === ">") {
-      if (currentPage < totalPages) currentPage++;
+      if (currentPage < totalPages - 1) currentPage++;
     }
     if (pageSelected === ">>") {
       currentPage = totalPages;
@@ -87,6 +87,7 @@ const Pagination = ({ dataCount, perPage, callBack }) => {
       {pages.myArr.map((v) => (
         <button
           type="button"
+          key={v}
           className={
             v === pages.page
               ? "pagination border-grey pl-1 pr-1 text-center active"

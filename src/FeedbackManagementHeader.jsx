@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import PageFilter from "./PageFilter";
 
-const FeedbackManagementHeader = ({ heading }) => {
+const FeedbackManagementHeader = ({ heading, setFilters, showFilters }) => {
   const [pageFeatures, setPageFeatures] = useState([]);
-
   const getPageFeatures = async () => {
     const response = await fetch(
       sessionStorage.getItem("proxy") +
@@ -26,7 +26,7 @@ const FeedbackManagementHeader = ({ heading }) => {
 
   return (
     <div className="w-100 d-flex flex-row">
-      <div className="d-flex flex-row justify-content-left w-20 text-lightgrey3 text-18 pb-2 pl-4">
+      <div className="d-flex flex-row justify-content-left w-47 text-lightgrey3 text-18 pb-1 pl-3">
         {pageFeatures ? (
           pageFeatures.map((f) => (
             <NavLink
@@ -34,15 +34,17 @@ const FeedbackManagementHeader = ({ heading }) => {
               title={f.title}
               to={f.target}
             >
-              <i className={"m-0 mt-1 p-0 align-self-center " + f.style} />
+              <i className={"m-0 mt-0 p-0 align-self-center " + f.style} />
             </NavLink>
           ))
         ) : (
           <></>
         )}
+        {showFilters == "true" ? <PageFilter setFilters={setFilters} /> : <></>}
       </div>
-      <div className="w-100 d-flex flex-column text-center">
-        <p className="text-high-tower font-style-bold text-lightgrey3 text-32 mt-3 mb-0 p-0">
+
+      <div className="w-40 d-flex flex-column">
+        <p className="text-high-tower font-style-bold text-lightgrey3 text-32 mt-1 mb-0 p-0 pl-2">
           {heading}
         </p>
       </div>
